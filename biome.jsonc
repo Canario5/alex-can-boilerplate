@@ -1,6 +1,7 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "assist": {
+    "enabled": true,
     "actions": {
       "source": {
         "organizeImports": "on",
@@ -8,8 +9,7 @@
         "useSortedKeys": "off",
         "useSortedProperties": "on"
       }
-    },
-    "enabled": true
+    }
   },
   "css": {
     "formatter": {
@@ -24,7 +24,8 @@
     "enabled": true,
     "indentStyle": "space",
     "indentWidth": 2,
-    "lineWidth": 115
+    "lineWidth": 115,
+    "lineEnding": "lf"
   },
   "javascript": {
     "formatter": {
@@ -35,11 +36,12 @@
     }
   },
   "linter": {
+    "enabled": true,
     "domains": {
       "project": "recommended"
     },
-    "enabled": true,
     "rules": {
+      "recommended": true,
       "complexity": {
         "noForEach": "info", //? https://biomejs.dev/linter/rules/no-for-each/
         "noUselessThisAlias": "error" //? "info" -> "error"; https://biomejs.dev/linter/rules/no-useless-this-alias/
@@ -50,7 +52,10 @@
         "noTsIgnore": "error", //? "warn" -> "error"; https://biomejs.dev/linter/rules/no-ts-ignore/
         "noUselessBackrefInRegex": "error" //? "warn" -> "error"; https://biomejs.dev/linter/rules/no-useless-backref-in-regex/
       },
-      "recommended": true,
+      "performance": {
+        "noBarrelFile": "warn", //? https://biomejs.dev/linter/rules/no-barrel-file/
+        "noReExportAll": "warn" //? https://biomejs.dev/linter/rules/no-re-export-all/
+      },
       "style": {
         "useComponentExportOnlyModules": "error" //? https://biomejs.dev/linter/rules/use-component-export-only-modules/
       },
