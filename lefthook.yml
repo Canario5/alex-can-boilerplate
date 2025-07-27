@@ -6,12 +6,14 @@
 pre-commit:
   parallel: true
   commands:
-    lint:
-      run: npm run lint:staged -- {staged_files}
-    typecheck:
-      run: npm run check:types
     knip:
       run: npm run knip:check
+    typecheck:
+      run: npm run check:types
+    depcheck:
+      run: npm run dep-cruise:check
+    lint:
+      run: npm run lint:staged -- {staged_files}
 
 commit-msg:
   commands:

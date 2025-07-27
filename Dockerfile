@@ -25,8 +25,9 @@ FROM base AS validate
 WORKDIR /app
 COPY . .
 RUN npm run knip:prod && \
-    npm run lint:check && \
-    npm run check:types
+    npm run dep-cruise:check && \
+    npm run check:types && \
+    npm run lint:check
 
 # Development stage
 FROM base AS dev

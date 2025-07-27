@@ -17,7 +17,8 @@
     "postinstall": "lefthook install",
     "knip:check": "echo 'Running Knip check...' && knip",
     "knip:apply": "echo 'Running Knip auto-fix...' && knip --fix --format",
-    "knip:prod": "echo 'Running Knip production check...' && knip --production --treat-config-hints-as-errors"
+    "knip:prod": "echo 'Running Knip production check...' && knip --production --treat-config-hints-as-errors",
+    "dep-cruise:check": "depcruise --validate .dependency-cruiser.cjs src"
   },
   "dependencies": {
     "react": "19.1.0",
@@ -31,6 +32,7 @@
     "@types/react": "19.1.8",
     "@types/react-dom": "19.1.6",
     "@vitejs/plugin-react-swc": "3.11.0",
+    "dependency-cruiser": "17.0.0",
     "knip": "5.62.0",
     "lefthook": "1.12.2",
     "typescript": "5.8.3",
