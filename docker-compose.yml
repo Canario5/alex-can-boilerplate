@@ -1,5 +1,5 @@
 services:
-  app:
+  dev:
     build:
       context: .
       target: dev
@@ -10,3 +10,12 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
+
+  prod:
+    build:
+      context: .
+      target: prod
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=production

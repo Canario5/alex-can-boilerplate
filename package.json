@@ -1,12 +1,13 @@
 {
-  "name": "glitchy-bits",
+  "name": "alex-can-boilerplate",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "docker:dev": "docker-compose up",
-    "docker:build": "docker build --target=prod -t glitchy-bits .",
-    "docker:run": "docker run -p 8080:80 glitchy-bits",
+    "docker:dev": "docker-compose up dev",
+    "docker:build": "docker-compose build prod",
+    "docker:run": "docker-compose up -d prod",
+    "docker:stop": "docker-compose down prod",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
@@ -14,11 +15,12 @@
     "lint:apply": "biome check --write .",
     "lint:staged": "echo 'Running Biome linter...'; biome check --apply --no-errors-on-unmatched",
     "check:types": "echo 'Checking TypeScript types...'; tsc --noEmit",
-    "postinstall": "lefthook install",
+    "prepare": "node scripts/npm-prepare.js",
     "knip:check": "echo 'Running Knip check...' && knip",
     "knip:apply": "echo 'Running Knip auto-fix...' && knip --fix --format",
     "knip:prod": "echo 'Running Knip production check...' && knip --production --treat-config-hints-as-errors",
-    "dep-cruise:check": "depcruise --validate .dependency-cruiser.cjs src"
+    "dep-cruise:check": "depcruise --validate .dependency-cruiser.cjs src",
+    "validate": "npm run knip:prod && npm run dep-cruise:check && npm run check:types && npm run lint:check"
   },
   "dependencies": {
     "react": "19.1.0",
