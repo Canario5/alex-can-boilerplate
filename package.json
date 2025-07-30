@@ -14,6 +14,7 @@
     "lint:check": "biome check .",
     "lint:apply": "biome check --write .",
     "lint:staged": "echo 'Running Biome linter...'; biome check --apply --no-errors-on-unmatched",
+    "lint:commit": "commitlint --edit",
     "check:types": "echo 'Checking TypeScript types...'; tsc --noEmit",
     "prepare": "node scripts/npm-prepare.js",
     "knip:check": "echo 'Running Knip check...' && knip",
