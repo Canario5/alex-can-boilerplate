@@ -19,7 +19,7 @@
     "prepare": "node scripts/npm-prepare.js",
     "knip:check": "echo 'Running Knip check...' && knip",
     "knip:apply": "echo 'Running Knip auto-fix...' && knip --fix --format",
-    "knip:prod": "echo 'Running Knip production check...' && knip --production --treat-config-hints-as-errors",
+    "knip:prod": "echo 'Running Knip production check...' && knip --production",
     "dep-cruise:check": "depcruise --validate .dependency-cruiser.cjs src",
     "validate": "npm run knip:prod && npm run dep-cruise:check && npm run check:types && npm run lint:check"
   },

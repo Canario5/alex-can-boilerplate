@@ -1,7 +1,9 @@
 import type { KnipConfig } from 'knip';
 
 const config: KnipConfig = {
-  ignoreBinaries: ['docker-compose', 'lefthook', 'commitlint'], //! lefthook + commitlint needed for knip --production
+  entry: ['src/main.tsx!'],
+  project: ['**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}!', '!scripts/npm-prepare.js!'],
+  ignoreBinaries: ['docker-compose', 'lefthook'],
 };
 
 export default config;
