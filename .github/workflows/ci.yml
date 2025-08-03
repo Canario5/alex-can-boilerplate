@@ -2,9 +2,9 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [main]
+    branches: [main, dev] #* Not needed, just security fallback
   pull_request:
-    branches: [main]
+    branches: [main, dev]
 
 jobs:
   validate:
