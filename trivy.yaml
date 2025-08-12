@@ -1,0 +1,37 @@
+timeout: 10m0s
+severity:
+  - HIGH
+  - CRITICAL
+exit-code: 1
+format: table
+quiet: false
+
+pkg:
+  types:
+    - os
+    - library
+
+misconfiguration:
+  scanners:
+    - dockerfile
+
+scan:
+  disable-telemetry: true
+  parallel: 10
+  scanners:
+    - secret
+    - misconfig
+
+  skip-dirs:
+    - node_modules
+    - dist
+    - build
+    - .git
+
+  skip-files:
+    - .env
+
+  skip-version-check: true
+
+db:
+  skip-update: false

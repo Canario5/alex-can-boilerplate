@@ -19,3 +19,8 @@ commit-msg:
   commands:
     "lint commit message":
       run: npm run lint:commit -- {1}
+
+pre-push:
+  commands:
+    trivy:
+      run: npm run trivy:code
