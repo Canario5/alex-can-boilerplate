@@ -1,0 +1,44 @@
+name: Trivy Security Scan - Image
+
+on:
+  schedule:
+    # Weekly scan (monday 4:00)
+    - cron: '0 4 * * 1'
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  image-scan:
+    name: Image (OS + app libraries CVEs)
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Build Docker image
+      run: |
+        docker build -t alex-can-boilerplate:${{ github.sha }} .
+        docker tag alex-can-boilerplate:${{ github.sha }} alex-can-boilerplate:latest
+
+    - name: Run Trivy image scan
+      uses: aquasecurity/trivy-action@0.30.0
+      with:
+          scan-type: 'image'
+          image-ref: 'alex-can-boilerplate:${{ github.sha }}'
+          format: 'sarif'
+          output: 'trivy-image-results.sarif'
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '1'
+          ignore-unfixed: true
+          limit-severities-for-sarif: true
+          trivyignores: '.trivyignore'
+      timeout-minutes: 15
+
+    - name: Upload Image results to GitHub Security tab
+      uses: github/codeql-action/upload-sarif@v3
+      if: always()
+      with:
+        sarif_file: 'trivy-image-results.sarif'
