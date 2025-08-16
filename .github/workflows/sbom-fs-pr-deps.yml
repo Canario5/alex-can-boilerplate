@@ -1,0 +1,47 @@
+name: SBOM (FS) - PR deps only
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '**/package-lock.json'
+
+permissions:
+  contents: read
+
+jobs:
+  sbom-fs-pr:
+    name: Filesystem SBOM on PR (when package-lock.json changes)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: FS SBOM -> GitHub Dependency Graph
+        uses: aquasecurity/trivy-action@0.30.0
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          scanners: 'sbom'
+          format: 'github'
+          output: 'dependency-results.sbom.json'
+          github-pat: ${{ secrets.GITHUB_TOKEN }}
+        timeout-minutes: 10
+
+      - name: FS SBOM (CycloneDX) artifact
+        uses: aquasecurity/trivy-action@0.30.0
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          scanners: 'sbom'
+          format: 'cyclonedx'
+          output: 'sbom.cyclonedx.json'
+        timeout-minutes: 10
+
+      - name: Upload SBOM artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-fs-pr
+          path: |
+            dependency-results.sbom.json
+            sbom.cyclonedx.json
+          retention-days: 14
