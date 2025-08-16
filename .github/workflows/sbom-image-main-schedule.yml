@@ -1,0 +1,52 @@
+name: SBOM (Image) - main + weekly
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 4 * * 1' # Monday 04:00
+
+permissions:
+  contents: read
+
+jobs:
+  sbom-image:
+    name: Image SBOM (main + weekly)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          docker build -t alex-can-boilerplate-prod --target prod .
+          echo "Built image with tag: alex-can-boilerplate-prod"
+
+      - name: Image SBOM -> GitHub Dependency Graph
+        uses: aquasecurity/trivy-action@0.30.0
+        with:
+          scan-type: 'image'
+          image-ref: 'alex-can-boilerplate-prod'
+          scanners: 'sbom'
+          format: 'github'
+          output: 'image-dependency-results.sbom.json'
+          github-pat: ${{ secrets.GITHUB_TOKEN }}
+        timeout-minutes: 15
+
+      - name: Image SBOM (CycloneDX) artifact
+        uses: aquasecurity/trivy-action@0.30.0
+        with:
+          scan-type: 'image'
+          image-ref: 'alex-can-boilerplate-prod'
+          scanners: 'sbom'
+          format: 'cyclonedx'
+          output: 'image-sbom.cyclonedx.json'
+        timeout-minutes: 15
+
+      - name: Upload Image SBOM artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-image-main
+          path: |
+            image-dependency-results.sbom.json
+            image-sbom.cyclonedx.json
+          retention-days: 30
