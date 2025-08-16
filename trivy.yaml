@@ -33,5 +33,8 @@ scan:
 
   skip-version-check: true
 
+secret:
+  config: "trivy-secret.yaml"
+
 db:
   skip-update: false
