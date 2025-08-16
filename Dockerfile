@@ -35,7 +35,8 @@ COPY . .
 RUN npm run build
 
 # Final production image (copies only built dist folder)
-FROM nginx:mainline-alpine-slim@sha256:64daa9307345a975d3952f4252827ed4be7f03ea675ad7bb5821f75ad3d43095 AS prod
+FROM nginxinc/nginx-unprivileged:alpine-slim@sha256:f60d6f99ab130cbaca7a1356e27ead0ca64cee16362f3a52dbca9795044eb1cd AS prod
+USER 101
 COPY --from=build /app/dist /usr/share/nginx/html
-EXPOSE 80
+EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]
