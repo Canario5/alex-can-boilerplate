@@ -18,7 +18,7 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**/*.js", "**/*.ts", "**/*.jsx", "**/*.tsx", "**/*.json", "!renovate.json"]
+    "includes": ["**/*.js", "**/*.ts", "**/*.jsx", "**/*.tsx", "**/*.json", "!renovate.json5"]
   },
   "formatter": {
     "enabled": true,

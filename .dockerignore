@@ -1,5 +1,5 @@
 # Development files
-renovate.json
+renovate.json5
 Dockerfile
 .dockerignore
 docker-compose.yml
