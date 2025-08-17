@@ -11,7 +11,7 @@
     "trivy:code": "echo 'Scanning source code for vulnerabilities...' && docker-compose run --rm trivy --config trivy.yaml fs .",
     "trivy:image": "echo 'Scanning the Docker image for vulnerabilities...' && docker-compose run --rm trivy --config trivy.yaml image alex-can-boilerplate-prod",
     "trivy:build-scan": "echo 'Building Docker image and scanning image for vulnerabilities...' && npm run docker:build && npm run trivy:image",
-    "trivy:vuln": "echo 'Scanning for vulnerabilities...' && docker-compose run --rm trivy --config trivy.yaml fs . --scanners vuln",
+    "trivy:vuln": "echo 'Scanning for vulnerabilities...' && docker-compose run --rm trivy --config trivy.yaml fs . --scanners vuln --include-dev-deps",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
