@@ -5,13 +5,14 @@ on:
   schedule:
     - cron: '0 4 * * 1' # Monday 04:00
 
-permissions:
-  contents: read
-
 jobs:
   sbom-image:
     name: Image SBOM (main + weekly)
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      TRIVY_QUIET: "true"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,7 +27,6 @@ jobs:
         with:
           scan-type: 'image'
           image-ref: 'alex-can-boilerplate-prod'
-          scanners: 'sbom'
           format: 'github'
           output: 'image-dependency-results.sbom.json'
           github-pat: ${{ secrets.GITHUB_TOKEN }}
@@ -37,7 +37,6 @@ jobs:
         with:
           scan-type: 'image'
           image-ref: 'alex-can-boilerplate-prod'
-          scanners: 'sbom'
           format: 'cyclonedx'
           output: 'image-sbom.cyclonedx.json'
         timeout-minutes: 15
