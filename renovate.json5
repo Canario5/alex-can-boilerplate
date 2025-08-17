@@ -7,6 +7,7 @@
   ],
   "timezone": "Europe/Prague",
   "schedule": [
+    "after 3:15pm and before 4:20pm on Monday",
     "after 3:15pm and before 4:20pm on Thursday"
   ],
   "lockFileMaintenance": {
