@@ -15,7 +15,7 @@ jobs:
       TRIVY_QUIET: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
 
       - name: Build Docker image
         run: |
@@ -23,7 +23,7 @@ jobs:
           echo "Built image with tag: alex-can-boilerplate-prod"
 
       - name: Image SBOM -> GitHub Dependency Graph
-        uses: aquasecurity/trivy-action@0.30.0
+        uses: aquasecurity/trivy-action@6c175e9c4083a92bbca2f9724c8a5e33bc2d97a5 # 0.30.0
         with:
           scan-type: 'image'
           image-ref: 'alex-can-boilerplate-prod'
@@ -33,7 +33,7 @@ jobs:
         timeout-minutes: 15
 
       - name: Image SBOM (CycloneDX) artifact
-        uses: aquasecurity/trivy-action@0.30.0
+        uses: aquasecurity/trivy-action@6c175e9c4083a92bbca2f9724c8a5e33bc2d97a5 # 0.30.0
         with:
           scan-type: 'image'
           image-ref: 'alex-can-boilerplate-prod'
@@ -42,7 +42,7 @@ jobs:
         timeout-minutes: 15
 
       - name: Upload Image SBOM artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: sbom-image-main
           path: |
