@@ -23,14 +23,14 @@
     {
       "groupName": "vite stack",
       "matchPackageNames": [
-        "/^vite/",
-        "/^@vitejs//"
+        "vite",
+        "/^@vitejs\\/.*/"
       ]
     },
     {
       "groupName": "biome linter/formatter",
       "matchPackageNames": [
-        "/^@biomejs//"
+        "/^@biomejs\\/.*/"
       ]
     }
   ]
