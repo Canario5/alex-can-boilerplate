@@ -7,7 +7,7 @@
     "docker:dev": "docker-compose up dev",
     "docker:build": "docker-compose build prod",
     "docker:run": "docker-compose up -d prod",
-    "docker:stop": "docker-compose down prod",
+    "docker:stop": "docker-compose down",
     "trivy:code": "echo 'Scanning source code for vulnerabilities...' && docker-compose run --rm trivy --config trivy.yaml fs .",
     "trivy:image": "echo 'Scanning the Docker image for vulnerabilities...' && docker-compose run --rm trivy --config trivy.yaml image alex-can-boilerplate-prod",
     "trivy:build-scan": "echo 'Building Docker image and scanning image for vulnerabilities...' && npm run docker:build && npm run trivy:image",
