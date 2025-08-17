@@ -38,7 +38,8 @@
   "linter": {
     "enabled": true,
     "domains": {
-      "project": "recommended"
+      "project": "recommended",
+      "react": "recommended"
     },
     "rules": {
       "recommended": true,
@@ -47,10 +48,9 @@
         "noUselessThisAlias": "error" //? "info" -> "error"; https://biomejs.dev/linter/rules/no-useless-this-alias/
       },
       "nursery": {
-        "noConstantBinaryExpression": "error", //? "info" -> "error"; https://biomejs.dev/linter/rules/no-constant-binary-expression/
-        "noImportantStyles": "warn", //? style rule; https://biomejs.dev/linter/rules/no-important-styles/
-        "noTsIgnore": "error", //? "warn" -> "error"; https://biomejs.dev/linter/rules/no-ts-ignore/
-        "noUselessBackrefInRegex": "error" //? "warn" -> "error"; https://biomejs.dev/linter/rules/no-useless-backref-in-regex/
+        "noUnnecessaryConditions": "warn", //? https://biomejs.dev/linter/rules/no-unnecessary-conditions/
+        "noNonNullAssertedOptionalChain": "error", //? https://biomejs.dev/linter/rules/no-non-null-asserted-optional-chain/
+        "useConsistentTypeDefinitions": "warn" //? "error" -> "warn"; https://biomejs.dev/linter/rules/use-consistent-type-definitions/
       },
       "performance": {
         "noBarrelFile": "warn", //? https://biomejs.dev/linter/rules/no-barrel-file/
@@ -60,7 +60,9 @@
         "useComponentExportOnlyModules": "error" //? https://biomejs.dev/linter/rules/use-component-export-only-modules/
       },
       "suspicious": {
-        "noExplicitAny": "error" //? "warn" -> "error"; https://biomejs.dev/linter/rules/no-explicit-any/
+        "noConstantBinaryExpressions": "warn", //? "info" -> "warn"; https://biomejs.dev/linter/rules/no-constant-binary-expressions/
+        "noExplicitAny": "warn", //? ? "warn" -> "error" ?; https://biomejs.dev/linter/rules/no-explicit-any/
+        "noUselessRegexBackrefs": "error" //? "warn" -> "error"; https://biomejs.dev/linter/rules/no-useless-regex-backrefs/
       }
     }
   },
