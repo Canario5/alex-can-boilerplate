@@ -5,13 +5,15 @@ on:
     paths:
       - '**/package-lock.json'
 
-permissions:
-  contents: read
-
 jobs:
   sbom-fs-pr:
     name: Filesystem SBOM on PR (when package-lock.json changes)
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      TRIVY_QUIET: "true"
+      TRIVY_INCLUDE_DEV_DEPS: "true"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -21,7 +23,6 @@ jobs:
         with:
           scan-type: 'fs'
           scan-ref: '.'
-          scanners: 'sbom'
           format: 'github'
           output: 'dependency-results.sbom.json'
           github-pat: ${{ secrets.GITHUB_TOKEN }}
@@ -32,7 +33,6 @@ jobs:
         with:
           scan-type: 'fs'
           scan-ref: '.'
-          scanners: 'sbom'
           format: 'cyclonedx'
           output: 'sbom.cyclonedx.json'
         timeout-minutes: 10
