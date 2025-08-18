@@ -35,7 +35,7 @@ COPY . .
 RUN npm run build
 
 # Final production image (copies only built dist folder)
-FROM nginxinc/nginx-unprivileged:alpine-slim@sha256:a910bc3b8e3d28493ab397a42e882e00346da7a4b7e40f62b281cdc150cbda99 AS prod
+FROM nginxinc/nginx-unprivileged:alpine-slim@sha256:ea6c4b8b568824ea94cd1fabd47e1c4e7c0c04744f344a3793f7e9c8ac3a3636 AS prod
 USER 101
 COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 8080
