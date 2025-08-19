@@ -38,11 +38,11 @@
     "@commitlint/types": "19.8.1",
     "@types/react": "19.1.10",
     "@types/react-dom": "19.1.7",
-    "@vitejs/plugin-react-swc": "4.0.0",
+    "@vitejs/plugin-react-swc": "4.0.1",
     "dependency-cruiser": "17.0.1",
     "knip": "5.62.0",
     "lefthook": "1.12.3",
     "typescript": "5.9.2",
-    "vite": "7.1.2"
+    "vite": "7.1.3"
   }
 }
