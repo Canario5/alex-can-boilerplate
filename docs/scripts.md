@@ -11,12 +11,14 @@
 
 ## Security Scanning
 
-| Script             | What it does                                                  | When to use                          |
-|--------------------|---------------------------------------------------------------|--------------------------------------|
-| `trivy:code`       | Scans source code for HIGH/CRITICAL vulnerabilities           | Regular security audits, CI pipeline |
-| `trivy:image`      | Scans built Docker image for vulnerabilities                  | After building production image      |
-| `trivy:build-scan` | Builds production image and scans it (combines above two)     | Pre-deployment security gate         |
-| `trivy:vuln`       | Deep dependency vulnerability scan including dev dependencies | Comprehensive security review        |
+| Script             | What it does                                                  | When to use                     |
+|--------------------|---------------------------------------------------------------|---------------------------------|
+| `trivy:code`       | Scans source code for secrets and misconfigurations           | Regular security audits         |
+| `trivy:image`      | Scans built Docker image for secrets and misconfigurations    | After building production image |
+| `trivy:build-scan` | Builds production image and scans it for secrets/misconfigs   | Pre-deployment security gate    |
+| `trivy:vuln`       | Deep dependency vulnerability scan including dev dependencies | Comprehensive security review   |
+
+**Note**: The `trivy:code`, `trivy:image`, and `trivy:build-scan` scripts scan for secrets and misconfigurations only. But GitHub Actions runs full scanning including vulnerabilities. That test can be run locally with `trivy:vuln` if needed.
 
 ## Code Quality & Tooling
 
