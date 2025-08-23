@@ -25,7 +25,13 @@
     "knip:apply": "echo 'Running Knip auto-fix...' && knip --fix --format",
     "knip:prod": "echo 'Running Knip production check...' && knip --production",
     "dep-cruise:check": "depcruise --validate .dependency-cruiser.cjs src",
-    "validate": "npm run knip:prod && npm run dep-cruise:check && npm run check:types && npm run lint:check"
+    "validate": "npm run knip:prod && npm run dep-cruise:check && npm run check:types && npm run lint:check",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:unit": "vitest run --project unit",
+    "test:unit:watch": "vitest --project unit",
+    "test:browser": "vitest run --project browser",
+    "test:browser:watch": "vitest --project browser"
   },
   "dependencies": {
     "react": "19.1.1",
@@ -36,13 +42,18 @@
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.8.1",
     "@commitlint/types": "19.8.1",
+    "@playwright/test": "1.55.0",
     "@types/react": "19.1.10",
     "@types/react-dom": "19.1.7",
     "@vitejs/plugin-react-swc": "4.0.1",
+    "@vitest/browser": "4.0.0-beta.8",
     "dependency-cruiser": "17.0.1",
     "knip": "5.62.0",
     "lefthook": "1.12.3",
+    "playwright": "1.55.0",
     "typescript": "5.9.2",
-    "vite": "7.1.3"
+    "vite": "7.1.3",
+    "vitest": "4.0.0-beta.8",
+    "vitest-browser-react": "2.0.0-beta.3"
   }
 }
