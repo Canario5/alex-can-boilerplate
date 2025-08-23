@@ -2,12 +2,12 @@
 
 ## Docker & Production
 
-| Script         | What it does                                               | When to use                             |
-|----------------|------------------------------------------------------------|-----------------------------------------|
-| `docker:dev`   | Starts dev container with hot-reload on port 5173          | Daily development workflow              |
-| `docker:build` | Builds production Docker image `alex-can-boilerplate-prod` | Before deployment or production testing |
-| `docker:run`   | Runs production image on http://localhost:8080 (detached)  | Local production environment testing    |
-| `docker:stop`  | Stops and removes all running containers                   | Cleanup after testing                   |
+| Script         | What it does                                                  | When to use                             |
+|----------------|---------------------------------------------------------------|-----------------------------------------|
+| `docker:dev`   | Starts dev container with hot-reload on http://localhost:5173 | Daily development workflow              |
+| `docker:build` | Builds production Docker image `alex-can-boilerplate-prod`    | Before deployment or production testing |
+| `docker:run`   | Runs production image on http://localhost:8080 (detached)     | Local production environment testing    |
+| `docker:stop`  | Stops and removes all running containers                      | Cleanup after testing                   |
 
 ## Security Scanning
 
