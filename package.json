@@ -30,8 +30,13 @@
     "test:watch": "vitest",
     "test:unit": "vitest run --project unit",
     "test:unit:watch": "vitest --project unit",
-    "test:browser": "vitest run --project browser",
-    "test:browser:watch": "vitest --project browser"
+    "test:component": "vitest run --project component",
+    "test:component:watch": "vitest --project component",
+    "test:integration": "vitest run --project integration",
+    "test:integration:watch": "vitest --project integration",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:debug": "playwright test --debug"
   },
   "dependencies": {
     "react": "19.1.1",

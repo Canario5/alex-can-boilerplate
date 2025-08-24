@@ -15,49 +15,58 @@ on:
     # Weekly scan (monday 4:00)
     - cron: '0 4 * * 1'
 
-permissions:
-  contents: read
-  security-events: write
-
 jobs:
+  build:
+    uses: ./.github/workflows/build-image.yml
+
   image-scan:
+    needs: build
     name: Image (OS + app libraries CVEs)
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    permissions:
+      contents: read
+      security-events: write
+      packages: read
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      - name: Checkout code
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
-    - name: Build Docker image
-      run: |
-        docker build -t alex-can-boilerplate:${{ github.sha }} .
-        docker tag alex-can-boilerplate:${{ github.sha }} alex-can-boilerplate:latest
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Run Trivy image scan
-      id: trivy_image
-      continue-on-error: true
-      uses: aquasecurity/trivy-action@dc5a429b52fcf669ce959baa2c2dd26090d2a6c4 # 0.32.0
-      with:
-        scan-type: 'image'
-        image-ref: 'alex-can-boilerplate:${{ github.sha }}'
-        format: 'sarif'
-        output: 'trivy-image-results.sarif'
-        vuln-type: 'os,library'
-        severity: 'CRITICAL,HIGH'
-        exit-code: '1'
-        ignore-unfixed: true
-        limit-severities-for-sarif: true
-        trivyignores: '.trivyignore'
+      - name: Pull Docker image
+        run: docker pull ${{ needs.build.outputs.image-tag }}
 
-    - name: Fail if Trivy found CRITICAL/HIGH
-      if: steps.trivy_image.outcome == 'failure'
-      run: |
-        echo "Trivy reported CRITICAL/HIGH findings."
-        exit 1
+      - name: Run Trivy image scan
+        id: trivy_image
+        continue-on-error: true
+        uses: aquasecurity/trivy-action@dc5a429b52fcf669ce959baa2c2dd26090d2a6c4 # 0.32.0
+        with:
+          scan-type: 'image'
+          image-ref: ${{ needs.build.outputs.image-tag }}
+          format: 'sarif'
+          output: 'trivy-image-results.sarif'
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '1'
+          ignore-unfixed: true
+          limit-severities-for-sarif: true
+          trivyignores: '.trivyignore'
 
-    - name: Upload Image results to GitHub Security tab
-      if: always()
-      uses: github/codeql-action/upload-sarif@3c3833e0f8c1c83d449a7478aa59c036a9165498 # v3
-      with:
-        sarif_file: 'trivy-image-results.sarif'
+      - name: Fail if Trivy found CRITICAL/HIGH
+        if: steps.trivy_image.outcome == 'failure'
+        run: |
+          echo "Trivy reported CRITICAL/HIGH findings."
+          exit 1
+
+      - name: Upload Image results to GitHub Security tab
+        if: always()
+        uses: github/codeql-action/upload-sarif@3c3833e0f8c1c83d449a7478aa59c036a9165498 # v3
+        with:
+          sarif_file: 'trivy-image-results.sarif'

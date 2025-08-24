@@ -268,3 +268,8 @@ ignore
 
 dist-ssr
 *.local
+
+# ignore test artifacts and snapshots
+tests/**/__screenshots__/
+tests/e2e/artifacts/
+tests/e2e/playwright-report/
