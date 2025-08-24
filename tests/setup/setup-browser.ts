@@ -1,4 +1,4 @@
-// Add global configs for browser tests later (e.g., RTL or custom matchers).
+// Add global configs for component and integration tests later.
 //* references below are currently correct https://vitest.dev/guide/browser/#typescript
 
 /// <reference types="@vitest/browser/matchers" />
