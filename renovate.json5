@@ -14,8 +14,13 @@
     "enabled": true,
     "schedule": [
       "after 3:15pm and before 4:20pm on Wednesday"
-    ]
+    ],
+    "updateLockFiles": true,
+    "automerge": true
   },
+  "postUpdateOptions": [
+    "npmDedupe",
+  ],
   "npm": {
     "minimumReleaseAge": "3 days"
   },
