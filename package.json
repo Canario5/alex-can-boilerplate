@@ -53,7 +53,7 @@
     "@vitejs/plugin-react-swc": "4.0.1",
     "@vitest/browser": "4.0.0-beta.8",
     "dependency-cruiser": "17.0.1",
-    "knip": "5.62.0",
+    "knip": "5.63.0",
     "lefthook": "1.12.3",
     "playwright": "1.55.0",
     "typescript": "5.9.2",
