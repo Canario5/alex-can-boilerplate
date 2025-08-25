@@ -1,42 +1,41 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:best-practices",
-    "group:react",
-    "group:definitelyTyped"
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'config:best-practices',
+    'group:react',
+    'group:definitelyTyped',
   ],
-  "timezone": "Europe/Prague",
-  "schedule": [
-    "after 3:15pm and before 4:20pm on Monday",
-    "after 3:15pm and before 4:20pm on Thursday"
+  timezone: 'Europe/Prague',
+  schedule: [
+    'after 3:15pm and before 4:20pm on Monday',
+    'after 3:15pm and before 4:20pm on Thursday',
   ],
-  "lockFileMaintenance": {
-    "enabled": true,
-    "schedule": [
-      "after 3:15pm and before 4:20pm on Wednesday"
+  lockFileMaintenance: {
+    enabled: true,
+    schedule: [
+      'after 3:15pm and before 4:20pm on Wednesday',
     ],
-    "updateLockFiles": true,
-    "automerge": true
+    automerge: true,
   },
-  "postUpdateOptions": [
-    "npmDedupe",
+  postUpdateOptions: [
+    'npmDedupe',
   ],
-  "npm": {
-    "minimumReleaseAge": "3 days"
+  npm: {
+    minimumReleaseAge: '3 days',
   },
-  "packageRules": [
+  packageRules: [
     {
-      "groupName": "vite stack",
-      "matchPackageNames": [
-        "vite",
-        "/^@vitejs\\/.*/"
-      ]
+      groupName: 'vite stack',
+      matchPackageNames: [
+        'vite',
+        '/^@vitejs\\/.*/',
+      ],
     },
     {
-      "groupName": "biome linter/formatter",
-      "matchPackageNames": [
-        "/^@biomejs\\/.*/"
-      ]
-    }
-  ]
+      groupName: 'biome linter/formatter',
+      matchPackageNames: [
+        '/^@biomejs\\/.*/',
+      ],
+    },
+  ],
 }
