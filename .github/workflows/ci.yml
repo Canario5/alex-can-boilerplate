@@ -31,6 +31,7 @@ jobs:
   tests:
     needs: validate
     uses: ./.github/workflows/tests.yml
-    permissions:   #* nested workflow cannot escalate permissions. tests.yml using build-image.yml which require these
-      packages: write
-      contents: read
+    permissions:          #* nested workflows cannot escalate permissions
+      packages: write     #? needed for build-image.yml through tests.yml
+      contents: read      #? needed for build-image.yml through tests.yml
+      checks: write       #? needed for JUnit reporting tests.yml
