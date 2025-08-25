@@ -6,7 +6,13 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0, //? In CI retry once to mitigate CI flakiness, locally fail immediately
   workers: process.env.CI ? 1 : undefined, //? locally Playwright sets number of workers automatically
-  reporter: [['html', { outputFolder: './tests/e2e/playwright-report', open: 'never' }]],
+  reporter: process.env.CI
+    ? [
+        ['html', { outputFolder: './tests/e2e/playwright-report', open: 'never' }],
+        ['junit', { outputFile: './tests/e2e/results.xml' }],
+        ['github'],
+      ]
+    : [['html', { outputFolder: './tests/e2e/playwright-report', open: 'never' }], ['list']],
   use: {
     baseURL: process.env.CI ? 'http://localhost:8080' : 'http://localhost:5173',
     trace: 'on-first-retry',
