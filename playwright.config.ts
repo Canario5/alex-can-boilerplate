@@ -11,7 +11,7 @@ export default defineConfig({
     baseURL: process.env.CI ? 'http://localhost:8080' : 'http://localhost:5173',
     trace: 'on-first-retry',
     screenshot: {
-      mode: 'on',
+      mode: 'only-on-failure',
       fullPage: true,
     },
   },
