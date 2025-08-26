@@ -17,6 +17,13 @@ jobs:
           cache: 'npm'
           cache-dependency-path: 'package-lock.json'
 
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright #? Where Ubuntu runner stores downloaded browsers
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }} #? Name of this cache "os-playwright-<hash package-lock.json>"
+          restore-keys: ${{ runner.os }}-playwright- #? Playwright is smart and can use incremental updates with older cache
+
       - name: Install dependencies
         run: npm ci --prefer-offline
 
@@ -60,6 +67,20 @@ jobs:
         run: |
           docker run -d -p 8080:8080 --name prod-app ${{ needs.build-image.outputs.image-tag }}
           timeout 60s sh -c 'until curl -s http://localhost:8080 >/dev/null; do sleep 2; done'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: 'package-lock.json'
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright #? Where Ubuntu runner stores downloaded browsers
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }} #? Name of this cache "os-playwright-<hash package-lock.json>"
+          restore-keys: ${{ runner.os }}-playwright- #? Playwright is smart and can use incremental updates with older cache
 
       - name: Install Playwright runtime only
         run: npm install --no-save @playwright/test
