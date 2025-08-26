@@ -64,9 +64,15 @@ jobs:
         run: docker pull ${{ needs.build-image.outputs.image-tag }}
 
       - name: Start production service using built image
-        run: |
-          docker run -d -p 8080:8080 --name prod-app ${{ needs.build-image.outputs.image-tag }}
-          timeout 60s sh -c 'until curl -s http://localhost:8080 >/dev/null; do sleep 2; done'
+        run: docker run -d -p 8080:8080 --name prod-app ${{ needs.build-image.outputs.image-tag }}
+
+      - name: Wait for service to be ready
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 1
+          max_attempts: 30
+          retry_wait_seconds: 2
+          command: curl -f http://localhost:8080 || exit 1
 
       - name: Set up Node.js
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
