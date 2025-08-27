@@ -18,7 +18,6 @@
 FROM node:24-alpine@sha256:51dbfc749ec3018c7d4bf8b9ee65299ff9a908e38918ce163b0acfcd5dd931d9 AS base
 WORKDIR /app
 COPY package*.json ./
-COPY scripts/npm-prepare.js scripts/npm-prepare.js
 RUN npm ci
 
 # Development stage
