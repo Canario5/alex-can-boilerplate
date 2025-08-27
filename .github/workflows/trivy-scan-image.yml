@@ -1,26 +1,15 @@
 name: Trivy Security Scan - Image
 
 on:
-  pull_request:
-    branches: [ main ]
-    paths:
-      - 'Dockerfile'
-      - '**/Dockerfile'
-      - '**/*.dockerfile'
-      - '**/docker/**'
-      - '.github/workflows/trivy-scan-image.yml'  # re-run if the workflow itself changes
-  push:
-    branches: [ main ]
-  schedule:
-    # Weekly scan (monday 4:00)
-    - cron: '0 4 * * 1'
+  workflow_call:
+    inputs:
+      image-tag:
+        type: string
+        required: true
+        description: "Pre-built image tag to scan"
 
 jobs:
-  build:
-    uses: ./.github/workflows/build-image.yml
-
   image-scan:
-    needs: build
     name: Image (OS + app libraries CVEs)
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -41,7 +30,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pull Docker image
-        run: docker pull ${{ needs.build.outputs.image-tag }}
+        run: docker pull ${{ inputs.image-tag }}
 
       - name: Run Trivy image scan
         id: trivy_image
@@ -49,7 +38,7 @@ jobs:
         uses: aquasecurity/trivy-action@dc5a429b52fcf669ce959baa2c2dd26090d2a6c4 # 0.32.0
         with:
           scan-type: 'image'
-          image-ref: ${{ needs.build.outputs.image-tag }}
+          image-ref: ${{ inputs.image-tag }}
           format: 'sarif'
           output: 'trivy-image-results.sarif'
           vuln-type: 'os,library'

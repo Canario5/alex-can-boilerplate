@@ -6,6 +6,7 @@ on:
     paths-ignore:
       - '**/*.md'
       - 'docs/**'
+
   pull_request:
     branches: [main]
     paths-ignore:
@@ -40,10 +41,38 @@ jobs:
       - name: Run Biome lint check
         run: npm run lint:check
 
-  tests:
+  build:
     needs: validate
+    uses: ./.github/workflows/build-image.yml
+    permissions: #* nested workflows cannot escalate permissions
+      packages: write     #? needed for build-image.yml
+      contents: read      #? needed for build-image.yml
+
+  tests:
+    needs: [validate, build]
     uses: ./.github/workflows/tests.yml
+    with:
+      run-unit: true
+      run-component: true
+      run-integration: false
+
+  e2e:
+    needs: [ validate, build, tests ]
+    uses: ./.github/workflows/e2e.yml
+    with:
+      image-tag: ${{ needs.build.outputs.image-tag }}
+      run-e2e: true
     permissions:          #* nested workflows cannot escalate permissions
-      packages: write     #? needed for build-image.yml through tests.yml
-      contents: read      #? needed for build-image.yml through tests.yml
+      packages: read
       checks: write       #? needed for JUnit reporting tests.yml
+      contents: read
+
+  trivy-image-scan:
+    needs: build
+    uses: ./.github/workflows/trivy-scan-image.yml
+    with:
+      image-tag: ${{ needs.build.outputs.image-tag }}
+    permissions:
+      contents: read
+      security-events: write
+      packages: read
