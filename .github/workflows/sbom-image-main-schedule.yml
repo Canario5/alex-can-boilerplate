@@ -9,11 +9,15 @@ on:
 jobs:
   build:
     uses: ./.github/workflows/build-image.yml
+    permissions: #* nested workflows cannot escalate permissions
+      packages: write     #? needed for build-image.yml
+      contents: read      #? needed for build-image.yml
 
   sbom-image:
     needs: build
     name: Image SBOM (main + weekly)
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: write
       packages: read
@@ -56,7 +60,7 @@ jobs:
       - name: Upload Image SBOM artifacts
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: sbom-image-main
+          name: sbom-image-${{ github.run_number }}-${{ github.sha }}
           path: |
             image-dependency-results.sbom.json
             image-sbom.cyclonedx.json
