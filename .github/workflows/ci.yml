@@ -75,4 +75,4 @@ jobs:
     permissions:
       contents: read
       security-events: write
-      packages: read
+      packages: write
