@@ -30,6 +30,9 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: write  #? For node caching
     timeout-minutes: 15
     steps:
       - name: Checkout code
