@@ -50,14 +50,14 @@
     "@types/react": "19.1.11",
     "@types/react-dom": "19.1.7",
     "@vitejs/plugin-react-swc": "4.0.1",
-    "@vitest/browser": "4.0.0-beta.8",
+    "@vitest/browser": "4.0.0-beta.9",
     "dependency-cruiser": "17.0.1",
     "knip": "5.63.0",
     "lefthook": "1.12.3",
     "playwright": "1.55.0",
     "typescript": "5.9.2",
     "vite": "7.1.3",
-    "vitest": "4.0.0-beta.8",
+    "vitest": "4.0.0-beta.9",
     "vitest-browser-react": "2.0.0-beta.3"
   }
 }
