@@ -7,6 +7,8 @@ on:
         description: "Built image tag"
         value: ${{ jobs.build.outputs.image-tag }}
 
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
