@@ -59,3 +59,4 @@ jobs:
         uses: github/codeql-action/upload-sarif@3c3833e0f8c1c83d449a7478aa59c036a9165498 # v3
         with:
           sarif_file: 'trivy-image-results.sarif'
+          category: trivy-image-scan

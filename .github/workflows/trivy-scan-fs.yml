@@ -42,3 +42,4 @@ jobs:
         if: always()
         with:
           sarif_file: 'trivy-fs-results.sarif'
+          category: trivy-fs-scan
