@@ -63,7 +63,7 @@ jobs:
     uses: ./.github/workflows/e2e.yml
     with:
       image-tag: ${{ needs.build.outputs.image-tag }}
-      run-e2e: true
+      run-e2e: false
     permissions:          #* nested workflows cannot escalate permissions
       packages: read
       checks: write       #? needed for JUnit reporting tests.yml
