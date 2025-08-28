@@ -15,7 +15,7 @@
 # -----------------------------------------------------------------------------
 
 # Base stage - npm installation
-FROM node:24-alpine@sha256:51dbfc749ec3018c7d4bf8b9ee65299ff9a908e38918ce163b0acfcd5dd931d9 AS base
+FROM node:24-alpine@sha256:b13895216ed51cc6decab51466f86346884af1e3656dea02a2a9c1a7c4dedccd AS base
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
