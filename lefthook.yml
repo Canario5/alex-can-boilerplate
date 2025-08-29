@@ -13,12 +13,12 @@ pre-commit:
     depcheck:
       run: pnpm run dep-cruise:check
     lint:
-      run: pnpm run lint:staged -- {staged_files}
+      run: pnpm run lint:staged -- "{staged_files}"
 
 commit-msg:
   commands:
     "lint commit message":
-      run: pnpm run lint:commit -- {1}
+      run: pnpm run lint:commit -- "{1}"
 
 pre-push:
   commands:
