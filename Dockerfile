@@ -16,7 +16,7 @@
 # -----------------------------------------------------------------------------
 
 # Base stage - pnpm installation
-FROM node:24-alpine@sha256:b13895216ed51cc6decab51466f86346884af1e3656dea02a2a9c1a7c4dedccd AS base
+FROM node:24-alpine@sha256:be4d5e92ac68483ec71440bf5934865b4b7fcb93588f17a24d411d15f0204e4f AS base
 WORKDIR /app
 RUN npm install -g pnpm
 COPY package.json pnpm-lock.yaml ./
