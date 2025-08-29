@@ -41,8 +41,8 @@
 **Daily Development:**
 
 ```bash
-npm run docker:dev   # Start development
-npm run lint:apply   # Fix code style
+pnpm run docker:dev   # Start development
+pnpm run lint:apply   # Fix code style
 ```
 
 **Before Deployment:**
@@ -59,7 +59,7 @@ No manual execution needed - just commit and push!
 **Troubleshooting:**
 
 ```bash
-npm run docker:stop   # Clean up containers
-npm run knip:check    # Find unused code
-npm run validate      # Scripts which run in pre-commit hook
+pnpm run docker:stop   # Clean up containers
+pnpm run knip:check    # Find unused code
+pnpm run validate      # Scripts which run in pre-commit hook
 ```
