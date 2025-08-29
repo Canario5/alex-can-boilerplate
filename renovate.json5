@@ -20,8 +20,8 @@
   postUpdateOptions: [
     'pnpmDedupe',
   ],
-  pnpm: {
-    minimumReleaseAge: '3 days',
+  npm: {
+    minimumReleaseAge: '3 days'
   },
   packageRules: [
     {
