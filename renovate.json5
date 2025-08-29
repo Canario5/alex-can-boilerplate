@@ -18,9 +18,9 @@
     automerge: true,
   },
   postUpdateOptions: [
-    'npmDedupe',
+    'pnpmDedupe',
   ],
-  npm: {
+  pnpm: {
     minimumReleaseAge: '3 days',
   },
   packageRules: [

@@ -10,6 +10,10 @@ node_modules
 dist
 dist-ssr
 
+# pnpm
+.pnpm-store
+pnpm-debug.log*
+
 # Environment files
 .env
 .env.local

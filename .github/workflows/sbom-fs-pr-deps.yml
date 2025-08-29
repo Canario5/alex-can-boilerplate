@@ -3,11 +3,12 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - '**/package-lock.json'
+      - '**/pnpm-lock.yaml'
+      - '**/package.json'
 
 jobs:
   sbom-fs-pr:
-    name: Filesystem SBOM on PR (when package-lock.json changes)
+    name: Filesystem SBOM on PR (when package.json or pnpm-lock.yaml changes)
     runs-on: ubuntu-latest
     permissions:
       contents: write
