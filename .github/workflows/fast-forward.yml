@@ -1,0 +1,26 @@
+name: Fast Forward ('/fast-forward')
+
+on:
+  issue_comment:
+    types: [created, edited]
+
+jobs:
+  fast-forward:
+    if: ${{ contains(github.event.comment.body, '/fast-forward') && github.event.issue.pull_request }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    concurrency:
+      group: fast-forward-${{ github.event.issue.number }}
+      cancel-in-progress: true
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: Fast forwarding
+        uses: sequoia-pgp/fast-forward@v1
+        with:
+          github_token: ${{ secrets.FF_PUSH_TOKEN }}
+          merge: true
+          comment: always
