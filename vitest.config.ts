@@ -25,9 +25,9 @@ export default defineConfig({
           include: ['tests/component/**/*.test.{ts,tsx,js,jsx}'],
           setupFiles: ['tests/setup/setup-browser.ts'],
         },
-        /*? Without optimizeDeps it reloaded these deps during the test... maybe because of beta versions? */
+        /*? Without optimizeDeps it reloaded these deps during the test... */
         optimizeDeps: {
-          include: ['vitest-browser-react', 'react/jsx-dev-runtime'],
+          include: ['vitest-browser-react', 'react/jsx-dev-runtime', 'jest-axe'],
         },
       },
       {
@@ -42,9 +42,9 @@ export default defineConfig({
           include: ['tests/integration/**/*.test.{ts,tsx,js,jsx}'],
           setupFiles: ['tests/setup/setup-browser.ts'],
         },
-        /*? Without optimizeDeps it reloaded these deps during the test... maybe because of beta versions? */
+        /*? Without optimizeDeps it reloaded these deps during the test... */
         optimizeDeps: {
-          include: ['vitest-browser-react', 'react/jsx-dev-runtime'],
+          include: ['vitest-browser-react', 'react/jsx-dev-runtime', 'jest-axe'],
         },
       },
     ],
