@@ -1,8 +1,7 @@
-import { axe } from 'jest-axe';
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-react';
-
 import App from '../../src/App';
+import { expectAccessible } from '../utils/accessibility';
 
 describe('App integration', () => {
   it('increments counter on button click', async () => {
@@ -21,13 +20,11 @@ describe('App integration', () => {
   it('maintains accessibility during interactions', async () => {
     const { container, getByRole } = await render(<App />);
 
-    const initialResults = await axe(container);
-    expect(initialResults).toHaveNoViolations();
+    await expectAccessible(container);
 
     const button = getByRole('button', { name: /count is/ });
     await button.click();
 
-    const afterClickResults = await axe(container);
-    expect(afterClickResults).toHaveNoViolations();
+    await expectAccessible(container, undefined, 'after click');
   });
 });
