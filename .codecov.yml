@@ -1,0 +1,17 @@
+coverage:
+  status:
+    project:
+      default:
+        target: 50%
+        threshold: 5%
+        informational: true #* Until project base is established
+    patch:
+      default:
+        target: 50%
+        threshold: 5%
+        informational: true
+
+comment:
+  layout: "reach,diff,flags,tree"
+  behavior: default
+  require_changes: true

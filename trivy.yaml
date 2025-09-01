@@ -27,6 +27,7 @@ scan:
     - dist
     - build
     - .git
+    - coverage
 
   skip-files:
     - .env
