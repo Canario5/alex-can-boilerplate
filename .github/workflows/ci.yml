@@ -82,7 +82,7 @@ jobs:
       contents: read
 
   check-fast-forward:
-    needs: [validate, build, tests]
+    needs: [validate, build]
     if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
