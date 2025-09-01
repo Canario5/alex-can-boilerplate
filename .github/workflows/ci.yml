@@ -65,7 +65,7 @@ jobs:
     with:
       run-unit: true
       run-component: true
-      run-integration: false
+      run-integration: true
     permissions:
       contents: read
       actions: write      #? For node caching
