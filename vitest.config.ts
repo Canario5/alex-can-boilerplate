@@ -1,4 +1,5 @@
 import react from '@vitejs/plugin-react-swc';
+import { playwright } from '@vitest/browser/providers/playwright';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
@@ -26,7 +27,7 @@ export default defineConfig({
           browser: {
             enabled: true,
             instances: [{ browser: 'chromium' }],
-            provider: 'playwright',
+            provider: playwright(),
             headless: true,
           },
           include: ['tests/component/**/*.test.{ts,tsx,js,jsx}'],
@@ -43,7 +44,7 @@ export default defineConfig({
           browser: {
             enabled: true,
             instances: [{ browser: 'chromium' }],
-            provider: 'playwright',
+            provider: playwright(),
             headless: true,
           },
           include: ['tests/integration/**/*.test.{ts,tsx,js,jsx}'],
