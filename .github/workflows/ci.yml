@@ -46,7 +46,7 @@ jobs:
       - name: Run Knip production check
         run: pnpm run knip:prod
       - name: Run Dependency Cruiser check
-        run: pnpm run dep-cruise:check
+        run: pnpm run depcruise:check
       - name: Run TypeScript type check
         run: pnpm run check:types
       - name: Run Biome lint check

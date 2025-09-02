@@ -274,3 +274,7 @@ tests/**/__screenshots__/
 tests/e2e/artifacts/
 tests/e2e/playwright-report/
 tests/e2e/results.xml
+
+# dependecy-cruiser report folder ignored except for .gitkeep
+/reports/depcruiser/*
+!/reports/depcruiser/.gitkeep

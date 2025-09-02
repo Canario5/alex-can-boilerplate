@@ -13,6 +13,13 @@ module.exports = {
       }
     },
     {
+      name: 'no-circular-src',
+      severity: 'error',
+      comment: 'Circular dependencies in production code (src) are forbidden.',
+      from: { path: '^(src)' },
+      to: { circular: true }
+    },
+    {
       name: 'no-orphans',
       comment:
         "This is an orphan module - it's likely not used (anymore?). Either use it or " +
@@ -24,10 +31,12 @@ module.exports = {
       from: {
         orphan: true,
         pathNot: [
-          '(^|/)[.][^/]+[.](?:js|cjs|mjs|ts|cts|mts|json)$',                  // dot files
-          '[.]d[.]ts$',                                                       // TypeScript declaration files
-          '(^|/)tsconfig[.]json$',                                            // TypeScript config
-          '(^|/)(?:babel|webpack)[.]config[.](?:js|cjs|mjs|ts|cts|mts|json)$' // other configs
+          '(^|/)[.][^/]+[.](?:js|cjs|mjs|ts|cts|mts|json)$',                    // dot files
+          '[.]d[.]ts$',                                                         // TypeScript declaration files
+          '(^|/)tsconfig[.]json$',                                              // TypeScript config
+          '(^|/)(?:babel|webpack)[.]config[.](?:js|cjs|mjs|ts|cts|mts|json)$',  // other configs
+          '(^|/)tests/setup/.*',                                                // referenced in vite.config.ts
+          '(^|/)tests/e2e/.*'                                                   // referenced in playwright.config.ts
         ]
       },
       to: {},
@@ -105,7 +114,7 @@ module.exports = {
       from: {},
       to: {
         couldNotResolve: true,
-        pathNot: '^/(vite\\.svg)$' //! Vite path for files in public folder cant be resolved by dependency-cruiser
+        pathNot: '^/.*\\.(?:svg|png|jpe?g|ico|webp|avif|gif)$'
       }
     },
     {
@@ -134,10 +143,10 @@ module.exports = {
         "or there's something in the test folder that isn't a test.",
       severity: 'error',
       from: {
-        pathNot: '^(src/test)'
+        pathNot: '^(tests)'
       },
       to: {
-        path: '^(src/test)'
+        path: '^(tests)'
       }
     },
     {
@@ -163,8 +172,7 @@ module.exports = {
         'from.pathNot re of the not-to-dev-dep rule in the dependency-cruiser configuration',
       from: {
         path: '^(src)',
-        pathNot: ['[.](?:spec|test)[.](?:js|mjs|cjs|jsx|ts|mts|cts|tsx)$',
-        '[.]d[.]ts$'] //! enable devDependencies for .d.ts
+        pathNot: '[.](?:spec|test)[.](?:js|mjs|cjs|jsx|ts|mts|cts|tsx)$'
       },
       to: {
         dependencyTypes: [
@@ -222,13 +230,13 @@ module.exports = {
     /* Which modules to exclude */
     exclude : {
       /* path: an array of regular expressions in strings to match against */
-      path: ['^coverage/'],
+      path: ['^coverage/', '^dist/', '^\\.git/'],
     },
 
     /* Which modules to exclusively include (array of regular expressions in strings)
        dependency-cruiser will skip everything not matching this pattern
     */
-    // includeOnly : [''],
+    includeOnly : ['^(src|tests)'],
 
     /* List of module systems to cruise.
        When left out dependency-cruiser will fall back to the list of _all_
@@ -263,7 +271,7 @@ module.exports = {
        true: also detect dependencies that only exist before typescript-to-javascript compilation
        "specify": for each dependency identify whether it only exists before compilation or also after
      */
-    tsPreCompilationDeps: true,
+    tsPreCompilationDeps: 'specify',
 
     /* list of extensions to scan that aren't javascript or compile-to-javascript.
        Empty by default. Only put extensions in here that you want to take into
@@ -335,14 +343,14 @@ module.exports = {
       /* List of conditions to check for in the exports field.
          Only works when the 'exportsFields' array is non-empty.
       */
-      conditionNames: ["import", "require", "node", "default", "types"],
+      conditionNames: ["import", "require", "browser", "node", "default", "types"],
       /* The extensions, by default are the same as the ones dependency-cruiser
          can access (run `npx depcruise --info` to see which ones that are in
          _your_ environment). If that list is larger than you need you can pass
          the extensions you actually use (e.g. [".js", ".jsx"]). This can speed
          up module resolution, which is the most expensive step.
        */
-      // extensions: [".js", ".jsx", ".ts", ".tsx", ".d.ts"],
+      extensions: [".js", ".jsx", ".ts", ".tsx", ".d.ts", ".json", ".css", ".svg"],
       /* What to consider a 'main' field in package.json */
       mainFields: ["module", "main", "types", "typings"],
       /* A list of alias fields in package.jsons
@@ -353,7 +361,7 @@ module.exports = {
 
          Defaults to an empty array (= don't use alias fields).
        */
-      // aliasFields: ["browser"],
+      aliasFields: ["browser"],
     },
 
     /* skipAnalysisNotInRules will make dependency-cruiser execute
@@ -407,4 +415,4 @@ module.exports = {
     }
   }
 };
-// generated: dependency-cruiser@17.0.0 on 2025-07-27T17:52:03.105Z
+// generated: dependency-cruiser@17.0.1 on 2025-09-01T19:24:48.513Z
