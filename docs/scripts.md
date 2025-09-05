@@ -33,8 +33,10 @@
 | `knip:apply`      | Auto-removes detected unused code (use with caution)                                | After manual review of knip:check    |
 | `knip:prod`       | Production-focused unused code detection                                            | Pre-release cleanup                  |
 | `depcruise:check` | Validates import/dependency rules and architecture                                  | CI pipeline, architecture compliance |
-| `validate`        | Runs comprehensive checks: knip:prod + dep-cruise + types + lint                    | One-command CI gate, pre-release     |
+| `validate`        | Runs comprehensive checks: knip:prod + depcruise:check + check:types + lint         | One-command CI gate, pre-release     |
 | `prepare`         | This script prevents build failures in environments without Git caused by Lefthook. | Initial project setup                |
+
+**pre-commit**: Runs `knip:check`, `check:types`, `depcruise:check`, and `lint:staged`
 
 ## Quick Reference
 
