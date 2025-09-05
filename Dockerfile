@@ -18,8 +18,9 @@
 # Base stage - pnpm installation
 FROM node:24-alpine@sha256:be4d5e92ac68483ec71440bf5934865b4b7fcb93588f17a24d411d15f0204e4f AS base
 WORKDIR /app
-RUN npm install -g pnpm
+RUN corepack enable
 COPY package.json pnpm-lock.yaml ./
+RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm fetch --frozen-lockfile
 RUN pnpm install --frozen-lockfile
 
 # Development stage
