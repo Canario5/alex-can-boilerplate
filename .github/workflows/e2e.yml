@@ -48,7 +48,7 @@ jobs:
           command: curl -f http://localhost:8080 || exit 1
 
       - name: Enable Corepack
-        run: corepack enable pnpm
+        run: corepack enable
 
       - name: Set up Node.js
         uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
@@ -73,23 +73,20 @@ jobs:
 
       - name: Publish E2E Test Results
         uses: dorny/test-reporter@dc3a92680fcc15842eef52e8c4606ea7ce6bd3f3 # v2
-        if: always()
+        if: ${{ !cancelled() }}
         with:
           name: 'E2E Test Results'
-          path: './tests/e2e/results.xml'
+          path: './reports/playwright/results.xml'
           reporter: 'java-junit'
           fail-on-error: false
 
-      - name: Stop container
-        if: always()
-        run: docker stop prod-app || true && docker rm prod-app || true
-
       - name: Upload test results
-        if: always()
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: e2e-test-results
           path: |
-            tests/e2e/playwright-report/
-            tests/e2e/results.xml
+            reports/playwright/playwright-report/
+            reports/playwright/results.xml
           retention-days: 7
+          fail_ci_if_error: false

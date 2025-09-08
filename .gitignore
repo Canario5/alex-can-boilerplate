@@ -278,3 +278,6 @@ tests/e2e/results.xml
 # dependency-cruiser report folder ignored except for .gitkeep
 /reports/depcruiser/**
 !/reports/depcruiser/.gitkeep
+# playwright report folder ignored except for .gitkeep
+/reports/playwright/**
+!/reports/playwright/.gitkeep
