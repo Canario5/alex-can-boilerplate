@@ -18,7 +18,7 @@ pre-commit:
 commit-msg:
   commands:
     "lint commit message":
-      run: pnpm run lint:commit -- "{1}"
+      run: pnpm run commitlint:check -- "{1}"
 
 pre-push:
   commands:

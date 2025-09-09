@@ -22,19 +22,19 @@
 
 ## Code Quality & Tooling
 
-| Script            | What it does                                                                        | When to use                          |
-|-------------------|-------------------------------------------------------------------------------------|--------------------------------------|
-| `lint:check`      | Runs Biome linter in read-only mode                                                 | CI checks, manual verification       |
-| `lint:apply`      | Auto-fixes all fixable Biome issues                                                 | After writing new code               |
-| `lint:staged`     | Lints only Git staged files (used by pre-commit hook)                               | Automatic via Git hooks              |
-| `lint:commit`     | Validates commit message format (conventional commits)                              | Automatic via Git hooks              |
-| `check:types`     | TypeScript type checking without compilation                                        | CI pipeline, pre-push verification   |
-| `knip:check`      | Detects unused files, exports, and dependencies                                     | Weekly codebase cleanup              |
-| `knip:apply`      | Auto-removes detected unused code (use with caution)                                | After manual review of knip:check    |
-| `knip:prod`       | Production-focused unused code detection                                            | Pre-release cleanup                  |
-| `depcruise:check` | Validates import/dependency rules and architecture                                  | CI pipeline, architecture compliance |
-| `validate`        | Runs comprehensive checks: knip:prod + depcruise:check + check:types + lint         | One-command CI gate, pre-release     |
-| `prepare`         | This script prevents build failures in environments without Git caused by Lefthook. | Initial project setup                |
+| Script             | What it does                                                                        | When to use                          |
+|--------------------|-------------------------------------------------------------------------------------|--------------------------------------|
+| `lint:check`       | Runs Biome linter in read-only mode                                                 | CI checks, manual verification       |
+| `lint:apply`       | Auto-fixes all fixable Biome issues                                                 | After writing new code               |
+| `lint:staged`      | Lints only Git staged files (used by pre-commit hook)                               | Automatic via Git hooks              |
+| `commitlint:check` | Validates commit message format (conventional commits)                              | Automatic via Git hooks              |
+| `check:types`      | TypeScript type checking without compilation                                        | CI pipeline, pre-push verification   |
+| `knip:check`       | Detects unused files, exports, and dependencies                                     | Weekly codebase cleanup              |
+| `knip:apply`       | Auto-removes detected unused code (use with caution)                                | After manual review of knip:check    |
+| `knip:prod`        | Production-focused unused code detection                                            | Pre-release cleanup                  |
+| `depcruise:check`  | Validates import/dependency rules and architecture                                  | CI pipeline, architecture compliance |
+| `validate`         | Runs comprehensive checks: knip:prod + depcruise:check + check:types + lint         | One-command CI gate, pre-release     |
+| `prepare`          | This script prevents build failures in environments without Git caused by Lefthook. | Initial project setup                |
 
 **pre-commit**: Runs `knip:check`, `check:types`, `depcruise:check`, and `lint:staged`
 
