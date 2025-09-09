@@ -26,7 +26,7 @@
     "knip:prod": "echo 'Running Knip production check...' && knip --production",
     "depcruise:check": "depcruise .",
     "depcruise:report": "depcruise . -T html -f reports/depcruiser/depcruise.html && depcruise . -T d2 -f reports/depcruiser/depcruise.d2 && d2 reports/depcruiser/depcruise.d2 reports/depcruiser/depcruise.svg",
-    "validate": "pnpm run knip:prod && pnpm run dep-cruise:check && pnpm run check:types && pnpm run lint:check",
+    "validate": "pnpm run knip:prod && pnpm run depcruise:check && pnpm run check:types && pnpm run lint:check",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
