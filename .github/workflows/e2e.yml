@@ -80,6 +80,16 @@ jobs:
           reporter: 'java-junit'
           fail-on-error: false
 
+      - name: Upload e2e test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./reports/playwright/results.xml
+          flags: e2e
+          name: e2e-tests
+          fail_ci_if_error: false
+
       - name: Upload test results
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -89,4 +99,3 @@ jobs:
             reports/playwright/playwright-report/
             reports/playwright/results.xml
           retention-days: 7
-          fail_ci_if_error: false
