@@ -18,9 +18,13 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['json', 'html', 'lcovonly'],
-      reportsDirectory: './coverage',
+      reportsDirectory: './reports/coverage',
       include: ['src/**/*'],
       exclude: ['src/main.tsx', 'src/vite-env.d.ts', 'src/**/*.d.ts'],
+    },
+    reporters: ['verbose', 'junit'],
+    outputFile: {
+      junit: './reports/vitest/junit.xml',
     },
     projects: [
       {

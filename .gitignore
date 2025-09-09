@@ -269,15 +269,18 @@ ignore
 dist-ssr
 *.local
 
-# ignore test artifacts and snapshots
+# ignore test snapshots
 tests/**/__screenshots__/
-tests/e2e/artifacts/
-tests/e2e/playwright-report/
-tests/e2e/results.xml
 
-# dependency-cruiser report folder ignored except for .gitkeep
+# coverage report folder ignored except for .gitkeep
+/reports/coverage/**
+!/reports/coverage/.gitkeep
+# dependency-cruiser report folder
 /reports/depcruiser/**
 !/reports/depcruiser/.gitkeep
-# playwright report folder ignored except for .gitkeep
+# vitest report folder
+/reports/vitest/**
+!/reports/vitest/.gitkeep
+# playwright (e2e) report folder
 /reports/playwright/**
 !/reports/playwright/.gitkeep
