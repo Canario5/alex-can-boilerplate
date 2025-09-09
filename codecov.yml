@@ -3,13 +3,42 @@ coverage:
     project:
       default:
         target: 50%
-        threshold: 5%
+        threshold: 3%
         informational: true #* Until project base is established
     patch:
       default:
-        target: 50%
+        target: 65%
         threshold: 5%
         informational: true #* Until project base is established
+
+flag_management:
+  default_rules:
+    carryforward: true
+    statuses:
+      - type: project
+        target: 50%
+        threshold: 3%
+        informational: true
+      - type: patch
+        target: 65%
+        threshold: 5%
+  individual_flags:
+    - name: unit
+      statuses:
+        - type: patch
+          target: 80%
+          threshold: 2%
+    - name: integration
+      statuses:
+        - type: patch
+          informational: true
+    - name: e2e
+      statuses:
+        - type: patch
+          informational: true
+
+codecov:
+  require_ci_to_pass: true
 
 comment:
   layout: "reach,diff,flags,tree"
