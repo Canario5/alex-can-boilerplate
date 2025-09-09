@@ -39,7 +39,7 @@ jobs:
 
       - name: Upload FS results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@f1f6e5f6af878fb37288ce1c627459e94dbf7d01 # v3
-        if: always()
+        if: ${{ !cancelled() }}
         with:
           sarif_file: 'trivy-fs-results.sarif'
           category: trivy-fs-scan
