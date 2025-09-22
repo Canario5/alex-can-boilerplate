@@ -1,27 +1,21 @@
 # syntax=docker/dockerfile:1@sha256:38387523653efa0039f8e1c89bb74a30504e76ee9f565e25c9a09841f9427b05
 
-# -----------------------------------------------------------------------------
-#
-# Local Development (starts dev service with hot-reloading):
-#   "docker-compose up dev"
-#
-# Build Production Image (builds prod service image):
-#   "docker-compose build prod"
-#
-# Run Production Image Locally (localhost:8080, detached):
-#   "docker-compose up -d prod"
-#   (Stop it with "docker-compose down prod")
-#
-# Or just use pnpm scripts from package.json
-# -----------------------------------------------------------------------------
+# --------------------------------------------
+#? Just use pnpm scripts from package.json
+#* more info: docs/scripts.md
+# --------------------------------------------
 
 # Base stage - pnpm installation
 FROM node:24-alpine@sha256:be4d5e92ac68483ec71440bf5934865b4b7fcb93588f17a24d411d15f0204e4f AS base
 WORKDIR /app
 RUN corepack enable
-COPY package.json pnpm-lock.yaml ./
+COPY pnpm-lock.yaml pnpm-workspace.yaml ./
+#! Note: pnpm fetch runs before package.json is copied so corepack can use inproper pnpm version!
 RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm fetch --frozen-lockfile
-RUN pnpm install --frozen-lockfile
+
+#* package.json is copied after fetch to leverage Docker caching when dependencies in package.json do not change (like edits of scripts for example)
+COPY package.json ./
+RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm install --frozen-lockfile --offline
 
 # Development stage
 FROM base AS dev
