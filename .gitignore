@@ -264,6 +264,8 @@ sketch
 # End of https://www.toptal.com/developers/gitignore/api/jetbrains+all,react,visualstudiocode,node
 
 .aider*
+.pampa
+pampa.codemap.json
 ignore
 
 dist-ssr
