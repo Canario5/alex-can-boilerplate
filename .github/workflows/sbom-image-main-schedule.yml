@@ -39,7 +39,7 @@ jobs:
         run: docker pull ${{ needs.build.outputs.image-tag }}
 
       - name: Image SBOM -> GitHub Dependency Graph
-        uses: aquasecurity/trivy-action@f9424c10c36e288d5fa79bd3dfd1aeb2d6eae808 # 0.33.0
+        uses: aquasecurity/trivy-action@b6643a29fecd7f34b3597bc6acb0a98b03d33ff8 # 0.33.1
         with:
           scan-type: 'image'
           image-ref: ${{ needs.build.outputs.image-tag }}
@@ -49,7 +49,7 @@ jobs:
         timeout-minutes: 15
 
       - name: Image SBOM (CycloneDX) artifact
-        uses: aquasecurity/trivy-action@f9424c10c36e288d5fa79bd3dfd1aeb2d6eae808 # 0.33.0
+        uses: aquasecurity/trivy-action@b6643a29fecd7f34b3597bc6acb0a98b03d33ff8 # 0.33.1
         with:
           scan-type: 'image'
           image-ref: ${{ needs.build.outputs.image-tag }}
