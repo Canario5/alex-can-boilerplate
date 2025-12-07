@@ -97,7 +97,7 @@ jobs:
           node-version: '24'
 
       - name: Cache Playwright browsers
-        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: ~/.cache/ms-playwright #? Where Ubuntu runner stores downloaded browsers
           key: ${{ runner.os }}-playwright-${{ hashFiles('pnpm-lock.yaml') }} #? Name of this cache "os-playwright-<hash of the pnpm-lock.yaml>"
@@ -152,7 +152,7 @@ jobs:
           node-version: '24'
 
       - name: Cache Playwright browsers
-        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: ~/.cache/ms-playwright #? Where Ubuntu runner stores downloaded browsers
           key: ${{ runner.os }}-playwright-${{ hashFiles('pnpm-lock.yaml') }} #? Name of this cache "os-playwright-<hash of the pnpm-lock.yaml>"
