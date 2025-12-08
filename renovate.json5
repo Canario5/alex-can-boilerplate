@@ -1,12 +1,9 @@
-/*! Every change validate this file with: */
-/*? npx --yes --package renovate -- renovate-config-validator renovate.json5 */
-
 {
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
   extends: [
     'config:best-practices',
     'group:vite',
-    'group:vitestMonorepo'
+    'group:vitestMonorepo',
   ],
   timezone: 'Europe/Prague',
   schedule: [
@@ -24,12 +21,14 @@
     'pnpmDedupe',
   ],
   npm: {
-    minimumReleaseAge: '14 days'
+    minimumReleaseAge: '14 days',
   },
   packageRules: [
     {
       groupName: 'vitestMonorepo',
-      matchPackageNames: ['vitest-browser-react']
+      matchPackageNames: [
+        'vitest-browser-react',
+      ],
     },
     {
       groupName: 'biome & commit tooling',
@@ -38,8 +37,8 @@
         '/^@commitlint\\/.*/',
         'lefthook',
         'dependency-cruiser',
-        'knip'
-      ]
+        'knip',
+      ],
     },
     {
       groupName: 'testing stack',
@@ -47,37 +46,47 @@
         'jest-axe',
         '@types/jest-axe',
         'playwright',
-        '@playwright/test'
-      ]
+        '@playwright/test',
+      ],
     },
     {
       groupName: 'Core GitHub Actions',
-      matchManagers: ['github-actions'],
-      matchPackagePatterns: ['^actions/'],
-      excludePackageNames: ['actions/setup-node']
+      matchManagers: [
+        'github-actions',
+      ],
+      matchPackageNames: [
+        '/^actions//',
+        '!actions/setup-node',
+      ],
     },
     {
       groupName: 'Test Actions',
-      matchManagers: ['github-actions'],
-      matchPackagePatterns: [
-        '^dorny/test-reporter',
-        '^codecov/codecov-action'
-      ]
+      matchManagers: [
+        'github-actions',
+      ],
+      matchPackageNames: [
+        '/^dorny/test-reporter/',
+        '/^codecov/codecov-action/',
+      ],
     },
     {
       groupName: 'Security Actions',
-      matchManagers: ['github-actions'],
-      matchPackagePatterns: [
-        '^aquasecurity/',
-        '^github/codeql-action'
-      ]
+      matchManagers: [
+        'github-actions',
+      ],
+      matchPackageNames: [
+        '/^aquasecurity//',
+        '/^github/codeql-action/',
+      ],
     },
     {
       groupName: 'Docker build Actions',
-      matchManagers: ['github-actions'],
-      matchPackagePatterns: [
-        '^docker/',
-      ]
-    }
+      matchManagers: [
+        'github-actions',
+      ],
+      matchPackageNames: [
+        '/^docker//',
+      ],
+    },
   ],
 }
