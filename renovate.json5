@@ -5,8 +5,8 @@
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
   extends: [
     'config:best-practices',
-    'group:react',
-    'group:definitelyTyped',
+    'group:vite',
+    'group:vitestMonorepo'
   ],
   timezone: 'Europe/Prague',
   schedule: [
@@ -24,21 +24,60 @@
     'pnpmDedupe',
   ],
   npm: {
-    minimumReleaseAge: '3 days'
+    minimumReleaseAge: '14 days'
   },
   packageRules: [
     {
-      groupName: 'vite stack',
-      matchPackageNames: [
-        'vite',
-        '/^@vitejs\\/.*/',
-      ],
+      groupName: 'vitestMonorepo',
+      matchPackageNames: ['vitest-browser-react']
     },
     {
-      groupName: 'biome linter/formatter',
+      groupName: 'biome & commit tooling',
       matchPackageNames: [
         '/^@biomejs\\/.*/',
-      ],
+        '/^@commitlint\\/.*/',
+        'lefthook',
+        'dependency-cruiser',
+        'knip'
+      ]
     },
+    {
+      groupName: 'testing stack',
+      matchPackageNames: [
+        'jest-axe',
+        '@types/jest-axe',
+        'playwright',
+        '@playwright/test'
+      ]
+    },
+    {
+      groupName: 'Core GitHub Actions',
+      matchManagers: ['github-actions'],
+      matchPackagePatterns: ['^actions/'],
+      excludePackageNames: ['actions/setup-node']
+    },
+    {
+      groupName: 'Test Actions',
+      matchManagers: ['github-actions'],
+      matchPackagePatterns: [
+        '^dorny/test-reporter',
+        '^codecov/codecov-action'
+      ]
+    },
+    {
+      groupName: 'Security Actions',
+      matchManagers: ['github-actions'],
+      matchPackagePatterns: [
+        '^aquasecurity/',
+        '^github/codeql-action'
+      ]
+    },
+    {
+      groupName: 'Docker build Actions',
+      matchManagers: ['github-actions'],
+      matchPackagePatterns: [
+        '^docker/',
+      ]
+    }
   ],
 }
