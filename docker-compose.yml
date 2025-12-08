@@ -28,7 +28,7 @@ services:
 
   trivy:
     profiles: [tools]
-    image: aquasec/trivy:0.66.0@sha256:086971aaf400beebd94e8300fd8ea623774419597169156cec56eec5b00dfb1e
+    image: aquasec/trivy:0.68.1@sha256:a93fd67162843c0f749002af9245fe9a2e5edc41445bd71d3949c803e95ef05b
     environment:
       - TRIVY_CACHE_DIR=/root/.cache/trivy
     volumes:
