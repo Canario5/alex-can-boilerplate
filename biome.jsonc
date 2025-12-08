@@ -18,7 +18,7 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**/*.js", "**/*.ts", "**/*.jsx", "**/*.tsx", "**/*.json", "!renovate.json5"]
+    "includes": ["**/*.js", "**/*.ts", "**/*.jsx", "**/*.tsx", "**/*.json", "!renovate.json5", "!!**/dist"]
   },
   "formatter": {
     "enabled": true,
@@ -44,27 +44,45 @@
     "rules": {
       "recommended": true,
       "complexity": {
-        "noForEach": "info", //? https://biomejs.dev/linter/rules/no-for-each/
-        "noUselessThisAlias": "error" //? "info" -> "error"; https://biomejs.dev/linter/rules/no-useless-this-alias/
+        "noForEach": "info",
+        //? https://biomejs.dev/linter/rules/no-for-each/
+        "noUselessThisAlias": "error"
+        //? "info" -> "error"; https://biomejs.dev/linter/rules/no-useless-this-alias/
       },
       "nursery": {
-        "noUnnecessaryConditions": "warn", //? https://biomejs.dev/linter/rules/no-unnecessary-conditions/
-        "noNonNullAssertedOptionalChain": "error", //? https://biomejs.dev/linter/rules/no-non-null-asserted-optional-chain/
-        "useConsistentTypeDefinitions": "warn" //? "error" -> "warn"; https://biomejs.dev/linter/rules/use-consistent-type-definitions/
+        "noUnnecessaryConditions": "warn",
+        //? https://biomejs.dev/linter/rules/no-unnecessary-conditions/
+        "noEmptySource": {
+          "options": {
+            "allowComments": true
+          },
+          "level": "error"
+        }
       },
       "performance": {
-        "noBarrelFile": "warn", //? https://biomejs.dev/linter/rules/no-barrel-file/
-        "noReExportAll": "warn" //? https://biomejs.dev/linter/rules/no-re-export-all/
+        "noBarrelFile": "warn",
+        //? https://biomejs.dev/linter/rules/no-barrel-file/
+        "noReExportAll": "warn"
+        //? https://biomejs.dev/linter/rules/no-re-export-all/
       },
       "style": {
-        "useComponentExportOnlyModules": "error" //? https://biomejs.dev/linter/rules/use-component-export-only-modules/
+        "useComponentExportOnlyModules": "error"
+        //? https://biomejs.dev/linter/rules/use-component-export-only-modules/
       },
       "suspicious": {
-        "noConstantBinaryExpressions": "warn", //? "info" -> "warn"; https://biomejs.dev/linter/rules/no-constant-binary-expressions/
-        "noExplicitAny": "warn", //? ? "warn" -> "error" ?; https://biomejs.dev/linter/rules/no-explicit-any/
-        "noUselessRegexBackrefs": "error" //? "warn" -> "error"; https://biomejs.dev/linter/rules/no-useless-regex-backrefs/
+        "noConstantBinaryExpressions": "warn",
+        //? "info" -> "warn"; https://biomejs.dev/linter/rules/no-constant-binary-expressions/
+        "noExplicitAny": "warn",
+        //? ? "warn" -> "error" ?; https://biomejs.dev/linter/rules/no-explicit-any/
+        "noUselessRegexBackrefs": "error"
+        //? "warn" -> "error"; https://biomejs.dev/linter/rules/no-useless-regex-backrefs/
       }
     }
   },
-  "vcs": { "clientKind": "git", "defaultBranch": "main", "enabled": true, "useIgnoreFile": true }
+  "vcs": {
+    "clientKind": "git",
+    "defaultBranch": "main",
+    "enabled": true,
+    "useIgnoreFile": true
+  }
 }
