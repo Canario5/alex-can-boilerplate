@@ -6,7 +6,7 @@
 # --------------------------------------------
 
 # Base stage - pnpm installation
-FROM node:24-alpine@sha256:3e843c608bb5232f39ecb2b25e41214b958b0795914707374c8acc28487dea17 AS base
+FROM node:24-alpine@sha256:c921b97d4b74f51744057454b306b418cf693865e73b8100559189605f6955b8 AS base
 WORKDIR /app
 RUN corepack enable
 COPY pnpm-lock.yaml pnpm-workspace.yaml ./
