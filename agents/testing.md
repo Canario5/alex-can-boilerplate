@@ -315,7 +315,7 @@ const element = page.getByRole('button', { name: /submit/i });
 
 **WRONG (Unit Test with Component):**
 ```ts
-import { render } from '@testing-library/react';
+import { render } from 'vitest-browser-react';
 import MyComponent from './MyComponent';
 
 test('should render', () => {
@@ -390,4 +390,6 @@ Tests mirror the exact directory structure of source code:
 - Unit: `pnpm run test:unit`
 - Component: `pnpm run test:component`
 - Integration: `pnpm run test:integration`
-- E2E: `pnpm run test:e2e`
+- All Vitest based tests (Unit + Component + Integration): `pnpm run test`
+- E2E (Playwright based): `pnpm run test:e2e`
+

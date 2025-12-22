@@ -284,7 +284,7 @@ docs: Playwright locators https://playwright.dev/docs/locators
 ## Running Tests
 
 ```bash
-# Run all tests
+# Run all Vitest based tests (unit + component + integration)
 pnpm run test
 
 # Run specific test types
