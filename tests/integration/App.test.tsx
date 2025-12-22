@@ -1,5 +1,5 @@
-import { page } from '@vitest/browser/context';
 import { describe, expect, test } from 'vitest';
+import { page } from 'vitest/browser';
 import { render } from 'vitest-browser-react';
 import App from '../../src/App';
 import { expectAccessible } from '../utils/accessibility';

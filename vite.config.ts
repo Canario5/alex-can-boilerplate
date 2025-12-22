@@ -1,6 +1,6 @@
 /// <reference types="vitest/config" />
 import react from '@vitejs/plugin-react-swc';
-import { playwright } from '@vitest/browser/providers/playwright';
+import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from 'vite';
 
 // https://vite.dev/config/
@@ -38,35 +38,35 @@ export default defineConfig({
       {
         test: {
           name: { label: 'component', color: 'cyan' },
+          include: ['./tests/component/*.test.{ts,tsx,js,jsx}'],
+          setupFiles: ['./tests/setup/setup-browser.ts'],
           browser: {
             enabled: true,
-            instances: [{ browser: 'chromium' }],
             provider: playwright(),
             headless: true,
+            instances: [{ browser: 'chromium' }],
           },
-          include: ['tests/component/**/*.test.{ts,tsx,js,jsx}'],
-          setupFiles: ['tests/setup/setup-browser.ts'],
         },
-        /*? Without optimizeDeps it reloaded these deps during the test... */
+        /*? Without optimizeDeps it reloads these deps during the tests... */
         optimizeDeps: {
-          include: ['vitest-browser-react', 'react/jsx-dev-runtime', 'jest-axe'],
+          include: ['react/jsx-dev-runtime', 'jest-axe'],
         },
       },
       {
         test: {
           name: { label: 'integration', color: 'magenta' },
+          include: ['./tests/integration/*.test.{ts,tsx,js,jsx}'],
+          setupFiles: ['./tests/setup/setup-browser.ts'],
           browser: {
             enabled: true,
-            instances: [{ browser: 'chromium' }],
             provider: playwright(),
             headless: true,
+            instances: [{ browser: 'chromium' }],
           },
-          include: ['tests/integration/**/*.test.{ts,tsx,js,jsx}'],
-          setupFiles: ['tests/setup/setup-browser.ts'],
         },
-        /*? Without optimizeDeps it reloaded these deps during the test... */
+        /*? Without optimizeDeps it reloads these deps during the tests... */
         optimizeDeps: {
-          include: ['vitest-browser-react', 'react/jsx-dev-runtime', 'jest-axe'],
+          include: ['react/jsx-dev-runtime', 'jest-axe'],
         },
       },
     ],

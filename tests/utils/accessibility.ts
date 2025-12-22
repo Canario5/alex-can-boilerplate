@@ -1,7 +1,7 @@
-import type { Locator } from '@vitest/browser/context';
 import type { JestAxeConfigureOptions } from 'jest-axe';
 import { axe } from 'jest-axe';
 import { expect } from 'vitest';
+import type { Locator } from 'vitest/browser';
 
 /**
  * Tests accessibility of a DOM element using axe-core through jest-axe

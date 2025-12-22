@@ -119,7 +119,7 @@ import { render } from 'vitest-browser-react';
 
 **REQUIRED IMPORTS:**
 ```ts
-import { page } from '@vitest/browser/context';
+import { page } from 'vitest/browser';
 import { describe, expect, test } from 'vitest';
 import { render } from 'vitest-browser-react';
 ```
@@ -199,7 +199,7 @@ describe('Component Name', () => {
 
 ### Integration Test Template
 ```ts
-import { page } from '@vitest/browser/context';
+import { page } from 'vitest/browser';
 import { describe, expect, test } from 'vitest';
 import { render } from 'vitest-browser-react';
 import ParentComponent from '../../src/path/ParentComponent';
@@ -296,7 +296,7 @@ const element = page.getByRole('button', { name: /submit/i });
 
 ### Integration Test Checklist
 - [ ] Multiple component interactions
-- [ ] Uses page from @vitest/browser/context
+- [ ] Uses page from vitest/browser
 - [ ] Tests cross-component state flows
 - [ ] Complex interaction patterns
 - [ ] Accessibility verified where relevant
@@ -383,7 +383,7 @@ Tests mirror the exact directory structure of source code:
 ### Import Constraints
 - Unit tests: vitest imports
 - Component tests: vitest + vitest-browser-react
-- Integration tests: vitest + vitest-browser-react + @vitest/browser/context
+- Integration tests: vitest + vitest-browser-react + vitest/browser
 - E2E tests: Only @playwright/test
 
 ### Execution Commands

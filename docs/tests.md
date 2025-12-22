@@ -117,7 +117,7 @@ describe('App Component', () => {
 | **Location**: `tests/integration/`                                    |
 | **Run with**: `pnpm run test:integration`                             |
 
-Integration tests verify that different parts of your application work together correctly. These tests use `page` from `@vitest/browser/context` which provides full browser page access, enabling testing of cross-component interactions and shared state.
+Integration tests verify that different parts of your application work together correctly. These tests use `page` from `vitest/browser` which provides full browser page access, enabling testing of cross-component interactions and shared state.
 
 **Key difference from Component Tests**: Uses `page` object for full page context testing
 
@@ -130,7 +130,7 @@ Integration tests verify that different parts of your application work together 
 **Example**:
 ```typescript
 // tests/integration/App.test.tsx
-import { page } from '@vitest/browser/context';
+import { page } from 'vitest/browser';
 import { describe, expect, test } from 'vitest';
 import { render } from 'vitest-browser-react';
 import App from '../../src/App';
