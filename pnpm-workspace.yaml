@@ -3,3 +3,5 @@ onlyBuiltDependencies:
   - esbuild
   - lefthook
   - oxc-resolver
+
+minimumReleaseAge: 1440 #* minutes; apply for transition deps as well
