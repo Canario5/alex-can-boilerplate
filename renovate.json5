@@ -77,5 +77,14 @@
         '/^docker//',
       ],
     },
+    {
+      description: 'Group Node.js version updates in CI and package.json',
+      matchDatasources: ['node-version'],
+      matchFileNames: [
+        '.github/workflows/ci.yml',
+        'package.json'
+      ],
+      groupName: 'Node.js'
+    },
   ],
 }
