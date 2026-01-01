@@ -77,5 +77,5 @@ The project uses **Docker Compose profiles**:
 - Solution: Ensure you are running `pnpm` commands inside the VS Code terminal (Dev Container), not your local machine's terminal, unless you are explicitly using `docker compose run ...`.
 ### Git Hooks & Security
 **Trivy fails on git push?** The pre-push hook relies on Docker.
-- Solution: Ensure Docker Desktop (Linux/Windows) or dockerd is running.
+- Solution: Ensure Docker Desktop (macOS/Windows) or dockerd (Linux) is running.
 - Error: Cannot connect to the Docker daemon -> Start Docker.
