@@ -1,2 +1,7 @@
 # Vulnerabilities to ignore in the project example
 # CVE-2021-44228
+
+# Ignore misconfigurations
+# Container drops privileges via gosu in docker-entrypoint.sh script. Application runs as non-root user 'vscode' at runtime. This is the recommended pattern for containers with bind mounts.
+# TODO: In future (when stable) move to .trivyignore.yaml file which supports specify exact file -> Dockerfile.dev in this case.
+AVD-DS-0002

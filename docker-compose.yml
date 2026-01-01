@@ -1,23 +1,27 @@
+name: alex-can-boilerplate
 services:
   dev:
     profiles: ["dev"]
-    image: alex-can-boilerplate-dev
     build:
       context: .
-      target: dev
+      dockerfile: Dockerfile.dev
+    init: true
+    working_dir: /app
     ports:
       - "5173:5173"
     volumes:
       - .:/app
-      - node_modules_volume:/app/node_modules
-      - pnpm_store:/root/.local/share/pnpm/store  # Persist pnpm cache
+      - node_modules:/app/node_modules #? Prevents to host to override node_modules in container
+      - pnpm_store:/home/vscode/.local/share/pnpm/store
+      - /var/run/docker.sock:/var/run/docker.sock #? Required for Trivy image scan; note: not ideal - dangerous. TODO: change that.
     environment:
       - NODE_ENV=development
-    command: sh -c "pnpm install && pnpm run dev"
+    #* Entrypoint script "docker-entrypoint.sh" runs before command below
+    command: tail -f /dev/null #? Keeps container alive, cleanly ends when needed
 
   prod:
     profiles: ["prod"]
-    image: alex-can-boilerplate-prod
+    restart: unless-stopped
     build:
       context: .
       target: prod
@@ -26,19 +30,6 @@ services:
     environment:
       - NODE_ENV=production
 
-  trivy:
-    profiles: [tools]
-    image: aquasec/trivy:0.68.1@sha256:a93fd67162843c0f749002af9245fe9a2e5edc41445bd71d3949c803e95ef05b
-    environment:
-      - TRIVY_CACHE_DIR=/root/.cache/trivy
-    volumes:
-      - .:/app
-      - trivy-cache:/root/.cache/trivy
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./trivy.yaml:/app/trivy.yaml
-    working_dir: /app
-
 volumes:
-  node_modules_volume:
   pnpm_store:
-  trivy-cache:
+  node_modules:

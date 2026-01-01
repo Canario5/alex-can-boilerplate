@@ -1,28 +1,12 @@
 # syntax=docker/dockerfile:1@sha256:b6afd42430b15f2d2a4c5a02b919e98a525b785b1aaff16747d2f623364e39b6
 
-# --------------------------------------------
-#? Just use pnpm scripts from package.json
-#* more info: docs/scripts.md
-# --------------------------------------------
-
 # Base stage - pnpm installation
 FROM node:24-alpine@sha256:c921b97d4b74f51744057454b306b418cf693865e73b8100559189605f6955b8 AS base
 WORKDIR /app
-RUN corepack enable
-COPY pnpm-lock.yaml pnpm-workspace.yaml ./
-#! Note: pnpm fetch runs before package.json is copied so corepack can use inproper pnpm version!
-RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm fetch --frozen-lockfile
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
-#* package.json is copied after fetch to leverage Docker caching when dependencies in package.json do not change (like edits of scripts for example)
-COPY package.json ./
-RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm install --frozen-lockfile --offline
-
-# Development stage
-FROM base AS dev
-WORKDIR /app
-COPY . .
-EXPOSE 5173
-CMD ["pnpm", "run", "dev"]
+RUN corepack enable && pnpm --version
+RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm install --frozen-lockfile
 
 # Production build stage
 FROM base AS build

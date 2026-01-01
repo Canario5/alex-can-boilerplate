@@ -1,16 +1,18 @@
 # Development files
 renovate.json5
 Dockerfile
-.dockerignore
+Dockerfile.dev
+.devcontainer
 docker-compose.yml
-coverage
+.dockerignore
 
-# Build and cache directories
+# Build artifacts & cache directories
 node_modules
 dist
 dist-ssr
+coverage
 
-# pnpm
+# pnpm cache
 .pnpm-store
 pnpm-debug.log*
 
@@ -33,8 +35,18 @@ knip.report.json
 
 # Misc
 .git
+.github
 *.local
 *.md
 .aider*
 ignore
+.pampa
+pampa.codemap.json
 
+# Keep licence
+!LICENSE
+!NOTICE
+
+# Playwright outputs
+test-results/
+playwright-report/

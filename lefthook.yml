@@ -3,24 +3,28 @@
 #   https://lefthook.dev/configuration/
 #
 
+#* Fallback base configuration which uses Docker Compose to run tools when it runs outside the devcontainer.
+#! This file is in devcontainer overridden by lefthook-devcontainer.yml which runs the tools natively!!
+#* Overridden by containerEnv -> LEFTHOOK_CONFIG in .devcontainer/devcontainer.json
+
 pre-commit:
   parallel: true
   commands:
     knip:
-      run: pnpm run knip:check
+      run: docker compose run --rm dev pnpm run knip:check
     typecheck:
-      run: pnpm run check:types
+      run: docker compose run --rm dev pnpm run check:types
     depcheck:
-      run: pnpm run depcruise:check
+      run: docker compose run --rm dev pnpm run depcruise:check
     lint:
-      run: pnpm run lint:staged -- "{staged_files}"
+      run: docker compose run --rm dev pnpm run lint:staged -- "{staged_files}"
 
 commit-msg:
   commands:
     "lint commit message":
-      run: pnpm run commitlint:check -- "{1}"
+      run: docker compose run --rm dev pnpm run commitlint:check -- "{1}"
 
 pre-push:
   commands:
     trivy:
-      run: pnpm run trivy:code
+      run: docker compose run --rm dev pnpm run trivy:code

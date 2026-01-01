@@ -1,0 +1,31 @@
+#
+#   Refer for explanation to following link:
+#   https://lefthook.dev/configuration/
+#
+
+#! This file overrides lefthook.yml file in devcontainer!!
+#* Overridden by containerEnv -> LEFTHOOK_CONFIG in .devcontainer/devcontainer.json
+
+extends: lefthook.yml
+
+pre-commit:
+  parallel: true
+  commands:
+    knip:
+      run: pnpm run knip:check
+    typecheck:
+      run: pnpm run check:types
+    depcheck:
+      run: pnpm run depcruise:check
+    lint:
+      run: pnpm run lint:staged -- "{staged_files}"
+
+commit-msg:
+  commands:
+    "lint commit message":
+      run: pnpm run commitlint:check -- "{1}"
+
+pre-push:
+  commands:
+    trivy:
+      run: trivy --config trivy.yaml fs .

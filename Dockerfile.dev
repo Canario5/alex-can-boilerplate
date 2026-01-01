@@ -1,0 +1,55 @@
+# syntax=docker/dockerfile:1
+
+FROM mcr.microsoft.com/devcontainers/base:trixie AS dev
+
+# User vscode already exists in Microsofts base images
+ARG USERNAME=vscode
+ARG NODE_VERSION=24
+ARG COREPACK_VERSION=0.34.5
+ARG PLAYWRIGHT_VERSION=1.57.0
+ARG D2_VERSION=0.7.1
+ARG TRIVY_VERSION=0.68.1
+
+USER root
+WORKDIR /app
+
+#? Install gosu (sudo alternative for containers)
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends gosu \
+  && rm -rf /var/lib/apt/lists/*
+
+
+RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
+  && apt-get update \
+  && apt-get install -y --no-install-recommends nodejs \
+  && rm -rf /var/lib/apt/lists/* \
+  && node --version
+
+
+RUN npm install -g corepack@${COREPACK_VERSION} \
+  && corepack --version \
+  && corepack enable
+
+
+#? Install only system dependencies (not Playwright nor Chromium browser) for Playwright Chromium
+RUN npx -y playwright@${PLAYWRIGHT_VERSION} install-deps chromium
+
+
+# Install D2
+RUN curl -fsSL https://d2lang.com/install.sh \
+  | sh -s -- \
+    --method=standalone \
+    --prefix=/usr/local \
+    --version "${D2_VERSION}" \
+  && d2 --version
+
+
+# Install Trivy
+RUN curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v${TRIVY_VERSION} \
+  && trivy --version
+
+
+#? Input the entrypoint.sh script and set executable permissions to it
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]

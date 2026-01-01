@@ -1,0 +1,35 @@
+{
+  "name": "alex-can-boilerplate",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "dev",
+  "runServices": ["dev"],
+  "workspaceFolder": "/app",
+  "shutdownAction": "stopCompose",
+
+  "containerEnv": {
+    "LEFTHOOK_CONFIG": "lefthook-devcontainer.yml"
+  },
+
+  "features": {},
+
+  "customizations": {
+    "jetbrains": {
+      "plugins": ["com.github.biomejs.intellijbiome"]
+    },
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "biomejs.biome",
+        "aaron-bond.better-comments",
+        "Codecov.codecov"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.biome": "explicit",
+          "source.organizeImports.biome": "explicit"
+        }
+      }
+    }
+  }
+}

@@ -4,22 +4,22 @@
 
 | Script         | What it does                                                    | When to use                                   |
 |----------------|-----------------------------------------------------------------|-----------------------------------------------|
-| `start:dev`    | Starts dev container with hot-reload on <http://localhost:5173> | Daily development workflow                    |
-| `rebuild:dev`  | Rebuilds dev container without cache                            | When dependencies or build process change     |
-| `stop:dev`     | Stops dev container                                             | Cleanup after development                     |
-| `shell:dev`    | Opens a shell inside the running dev container                  | Quick debugging or manual command execution   |
-| `start:prod`   | Runs production image on <http://localhost:8080> (detached)     | Build and serve static files                  |
-| `rebuild:prod` | Rebuilds production container without cache                     | Full clean build (for major changes/releases) |
-| `stop:prod`    | Stops production container                                      | Stop prod image with nginx                    |
-| `stop:docker`  | Stops all containers (dev, prod, tools)                         | Complete cleanup after testing                |
+| `dev:up`       | Starts dev container with hot-reload on <http://localhost:5173> | Daily development workflow                    |
+| `dev:rebuild`  | Rebuilds dev container without cache                            | When dependencies or build process change     |
+| `dev:down`     | Stops dev container                                             | Cleanup after development                     |
+| `dev:shell`    | Opens a shell inside the running dev container                  | Quick debugging or manual command execution   |
+| `prod:up`      | Runs production image on <http://localhost:8080> (detached)     | Build and serve static files                  |
+| `prod:rebuild` | Rebuilds production container without cache                     | Full clean build (for major changes/releases) |
+| `prod:down`    | Stops production container                                      | Stop prod image with nginx                    |
+| `docker:stop`  | Stops all containers                                            | Complete cleanup after testing                |
 
 ## Security Scanning
 
-| Script             | What it does                                                  | When to use                     |
-|--------------------|---------------------------------------------------------------|---------------------------------|
-| `trivy:code`       | Scans source code for secrets and misconfigurations           | Regular security audits         |
-| `trivy:image`      | Scans built Docker image for secrets and misconfigurations    | After building production image |
-| `trivy:vuln`       | Deep dependency vulnerability scan including dev dependencies | Comprehensive security review   |
+| Script        | What it does                                                       | When to use                     |
+|---------------|--------------------------------------------------------------------|---------------------------------|
+| `trivy:code`  | Scans source code for secrets and misconfigurations (inside `dev`) | Regular security audits         |
+| `trivy:image` | Scans built Docker image for secrets and misconfigurations         | After building production image |
+| `trivy:vuln`  | Deep dependency vulnerability scan including dev dependencies      | Comprehensive security review   |
 
 **Note**: The `trivy:code` and `trivy:image` scripts scan for secrets and misconfigurations only. But GitHub Actions runs full scanning including vulnerabilities. That test can be run locally with `trivy:vuln` if needed.
 
@@ -54,15 +54,15 @@ No manual execution needed - just commit and if everything pass, push!
 **Daily Development:**
 
 ```bash
-pnpm run start:dev    # Start development
-pnpm run shell:dev    # Open a shell inside the dev container
+pnpm run dev:up    # Start development
+pnpm run dev:shell    # Open a shell inside the dev container
 pnpm run lint:apply   # Fix code style
 ```
 
 **Troubleshooting:**
 
 ```bash
-pnpm run stop:docker   # Clean up all containers
+pnpm run docker:stop   # Clean up all containers
 pnpm run knip:check    # Find unused code
 pnpm run validate      # Scripts which run in pre-commit hook
 ```
