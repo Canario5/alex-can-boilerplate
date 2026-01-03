@@ -37,7 +37,7 @@ export default defineConfig({
       },
       {
         test: {
-          name: { label: 'component', color: 'cyan' },
+          name: { label: 'component', color: 'blue' },
           include: ['./tests/component/*.test.{ts,tsx,js,jsx}'],
           setupFiles: ['./tests/setup/setup-browser.ts'],
           browser: {
@@ -54,7 +54,7 @@ export default defineConfig({
       },
       {
         test: {
-          name: { label: 'integration', color: 'magenta' },
+          name: { label: 'integration', color: 'cyan' },
           include: ['./tests/integration/*.test.{ts,tsx,js,jsx}'],
           setupFiles: ['./tests/setup/setup-browser.ts'],
           browser: {
