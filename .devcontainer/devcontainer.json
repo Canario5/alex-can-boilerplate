@@ -5,23 +5,22 @@
   "runServices": ["dev"],
   "workspaceFolder": "/app",
   "shutdownAction": "stopCompose",
-
   "containerEnv": {
     "LEFTHOOK_CONFIG": "lefthook-devcontainer.yml"
   },
-
   "features": {},
-
   "customizations": {
     "jetbrains": {
       "plugins": ["com.github.biomejs.intellijbiome"]
     },
     "vscode": {
       "extensions": [
-        "ms-azuretools.vscode-docker",
         "biomejs.biome",
-        "aaron-bond.better-comments",
-        "Codecov.codecov"
+        "Codecov.codecov",
+        "ms-playwright.playwright",
+        "vitest.explorer",
+        "github.vscode-github-actions",
+        "coderabbit.coderabbit-vscode"
       ],
       "settings": {
         "editor.formatOnSave": true,
