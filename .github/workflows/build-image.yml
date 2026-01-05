@@ -34,6 +34,8 @@ jobs:
           labels: |
             org.opencontainers.image.source=${{ github.repositoryUrl }}
             org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.title=Alex Can Boilerplate
+            org.opencontainers.image.description=Modern boilerplate
 
       # 2️⃣ Authenticate to the registry
       - name: Log in to GitHub Container Registry
