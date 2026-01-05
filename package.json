@@ -25,7 +25,7 @@
     "preview": "vite preview",
     "lint:check": "biome check .",
     "lint:apply": "biome check --write .",
-    "lint:staged": "echo 'Running Biome linter...'; biome check --apply --no-errors-on-unmatched",
+    "lint:staged": "echo 'Running Biome linter...'; biome check --write --no-errors-on-unmatched",
     "commitlint:check": "commitlint --edit",
     "check:types": "echo 'Checking TypeScript types...'; tsc --noEmit",
     "knip:check": "echo 'Running Knip check...' && knip",
