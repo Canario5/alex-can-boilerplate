@@ -1,0 +1,36 @@
+name: Cleanup GHCR Images
+on:
+  schedule:
+    - cron: '0 2 * * 1' # every Monday at 2:00
+  workflow_dispatch:
+
+env:
+  IMAGE_NAME: alex-can-boilerplate/alex-can-boilerplate-prod
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - name: Delete untagged images
+        uses: snok/container-retention-policy@v3.0.1
+        with:
+          account: user
+          token: ${{ secrets.GHCR_CLEANUP_TOKEN }}
+          image-names: ${{ env.IMAGE_NAME }}
+          cut-off: 7d
+          tag-selection: untagged
+          dry-run: false
+
+      - name: Delete old tagged images
+        uses: snok/container-retention-policy@v3.0.1
+        with:
+          account: user
+          token: ${{ secrets.GHCR_CLEANUP_TOKEN }}
+          image-names: ${{ env.IMAGE_NAME }}
+          cut-off: 35d
+          tag-selection: tagged
+          keep-n-most-recent: 12
+          dry-run: false
