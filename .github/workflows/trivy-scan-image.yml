@@ -35,7 +35,7 @@ jobs:
       - name: Run Trivy image scan
         id: trivy_image
         continue-on-error: true
-        uses: aquasecurity/trivy-action@b6643a29fecd7f34b3597bc6acb0a98b03d33ff8 # 0.33.1
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
           scan-type: 'image'
           image-ref: ${{ inputs.image-tag }}
@@ -56,7 +56,7 @@ jobs:
 
       - name: Upload Image results to GitHub Security tab
         if: ${{ !cancelled() }}
-        uses: github/codeql-action/upload-sarif@cdefb33c0f6224e58673d9004f47f7cb3e328b89 # v4
+        uses: github/codeql-action/upload-sarif@e46ed2cbd01164d986452f91f178727624ae40d7 # v4
         with:
           sarif_file: 'trivy-image-results.sarif'
           category: trivy-image-scan
