@@ -1,7 +1,6 @@
 name: alex-can-boilerplate
 services:
   dev:
-    profiles: ["dev"]
     build:
       context: .
       dockerfile: Dockerfile.dev
@@ -21,7 +20,6 @@ services:
     command: tail -f /dev/null #? Keeps container alive, cleanly ends when needed
 
   prod:
-    profiles: ["prod"]
     restart: unless-stopped
     build:
       context: .

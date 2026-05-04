@@ -21,16 +21,6 @@ if [ -d .git ]; then
   git config --global --add safe.directory /app
 fi
 
-#? Get correct pnmp version from package.json and install it through corepack (installed in Dockerfile.dev)
-corepack prepare "$(node -p "require('./package.json').packageManager")" --activate
-
-#? Specified folder for pnpm-store limits situations when local pnpm-store slips through general .:/App bind
-pnpm config set store-dir /home/vscode/.local/share/pnpm/store --location project
-
-pnpm install --frozen-lockfile
-
-pnpm exec playwright install chromium
-
 #? Theoretically not needed because onlyBuiltDependencies from pnpm-workspace.yaml; but better safe than sorry
 if [ -d .git ]; then
   pnpm exec lefthook install
