@@ -47,8 +47,8 @@ jobs:
           retry_wait_seconds: 2
           command: curl -f http://localhost:8080 || exit 1
 
-      - name: Enable Corepack
-        run: corepack enable
+      - name: Install pnpm (uses "packageManager" from package.json)
+        uses: pnpm/action-setup@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
