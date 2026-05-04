@@ -16,7 +16,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock #? Required for Trivy image scan; note: not ideal - dangerous. TODO: change that.
     environment:
       - NODE_ENV=development
-    #* Entrypoint script "docker-entrypoint.sh" runs before command below
+      - pnpm_config_store_dir=/home/vscode/.local/share/pnpm/store
+    #* Entrypoint script "docker-entrypoint.sh" runs here before command below
     command: tail -f /dev/null #? Keeps container alive, cleanly ends when needed
 
   prod:

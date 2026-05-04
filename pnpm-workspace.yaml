@@ -1,9 +1,6 @@
-onlyBuiltDependencies:
-  - '@swc/core'
-  - esbuild
-  - lefthook
-  - oxc-resolver
-
-minimumReleaseAge: 1440 #* minutes; apply for transition deps as well
-
 dedupePeers: true
+minimumReleaseAge: 2160 #* minutes; apply for transition deps as well
+allowBuilds:
+  esbuild: true
+  lefthook: true
+  oxc-resolver: true
