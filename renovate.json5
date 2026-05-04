@@ -30,9 +30,8 @@
       matchPackageNames: ['vitest-browser-react',]
     },
     {
-      groupName: 'biome & commit tooling',
+      groupName: 'commit tooling',
       matchPackageNames: [
-        '/^@biomejs\\/.*/',
         '/^@commitlint\\/.*/',
         'lefthook',
         'dependency-cruiser',
