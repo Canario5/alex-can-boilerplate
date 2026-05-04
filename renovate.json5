@@ -58,6 +58,7 @@
       matchPackageNames: [
         '/^dorny/test-reporter/',
         '/^codecov/codecov-action/',
+        '/^nick-fields/retry',
       ],
     },
     {
