@@ -2,7 +2,7 @@
 
 FROM mcr.microsoft.com/devcontainers/base:trixie@sha256:e389149057371298eaeb72e736fc2c4dcb79974de222dd471d2e6d675d2f61c4 AS dev
 
-# User vscode already exists in Microsofts base images
+# Note: The user vscode already exists by default in Microsofts base images
 ARG USERNAME=vscode
 ARG NODE_VERSION=24
 ARG COREPACK_VERSION=0.34.5
