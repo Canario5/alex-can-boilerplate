@@ -21,7 +21,7 @@ if [ -d .git ]; then
   git config --global --add safe.directory /app
 fi
 
-#? Theoretically not needed because onlyBuiltDependencies from pnpm-workspace.yaml; but better safe than sorry
+#? Theoretically not needed because allowBuilds in pnpm-workspace.yaml; but better be safe than sorry
 if [ -d .git ]; then
   pnpm exec lefthook install
 fi

@@ -5,7 +5,7 @@
   "runServices": ["dev"],
   "workspaceFolder": "/app",
   "shutdownAction": "stopCompose",
-  "postCreateCommand": "corepack prepare \"$(node -p \"require('./package.json').packageManager\")\" --activate && pnpm install --frozen-lockfile && pnpm exec playwright install chromium",
+  "updateContentCommand": "corepack prepare $(node -p 'require(\"./package.json\").packageManager') --activate && pnpm install --frozen-lockfile && pnpm exec playwright install chromium",
   "containerEnv": {
     "LEFTHOOK_CONFIG": "lefthook-devcontainer.yml"
   },
