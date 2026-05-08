@@ -50,14 +50,8 @@
         //? "info" -> "error"; https://biomejs.dev/linter/rules/no-useless-this-alias/
       },
       "nursery": {
-        "noUnnecessaryConditions": "warn",
+        "noUnnecessaryConditions": "warn"
         //? https://biomejs.dev/linter/rules/no-unnecessary-conditions/
-        "noEmptySource": {
-          "options": {
-            "allowComments": true
-          },
-          "level": "error"
-        }
       },
       "performance": {
         "noBarrelFile": "warn",
