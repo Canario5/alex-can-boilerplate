@@ -39,7 +39,8 @@
     "enabled": true,
     "domains": {
       "project": "recommended",
-      "react": "recommended"
+      "react": "recommended",
+      "test": "all"
     },
     "rules": {
       "recommended": true,
