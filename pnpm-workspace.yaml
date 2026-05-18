@@ -1,7 +1,5 @@
 dedupePeers: true
-minimumReleaseAge: 2160 #* minutes; apply for transition deps as well
-minimumReleaseAgeExclude:
-  - "pnpm@11.1.2"
+minimumReleaseAge: 2160 #* minutes; applies for transition deps as well
 allowBuilds:
   esbuild: true
   lefthook: true
