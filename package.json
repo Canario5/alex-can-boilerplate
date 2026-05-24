@@ -69,7 +69,7 @@
     "@vitest/coverage-v8": "4.1.6",
     "dependency-cruiser": "17.4.0",
     "jest-axe": "10.0.0",
-    "knip": "6.14.1",
+    "knip": "6.14.2",
     "lefthook": "2.1.8",
     "playwright": "1.60.0",
     "typescript": "5.9.3",
