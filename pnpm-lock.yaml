@@ -5,6 +5,9 @@ settings:
   dedupePeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  picomatch@2: 2.3.2
+
 importers:
 
   .:

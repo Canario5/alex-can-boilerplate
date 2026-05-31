@@ -5,4 +5,5 @@ allowBuilds:
   lefthook: true
   oxc-resolver: true
 saveExact: true
-
+overrides:
+  "picomatch@2": "2.3.2"

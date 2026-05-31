@@ -89,7 +89,7 @@
     { 
       description: 'Picomatch@2.3.2 is CVE fix for old not updated @types/jest-axe. This suppress major upgrades to avoid breaking changes.',
       matchPackageNames: ['picomatch'],
-      matchDepTypes: ['pnpm.overrides'],
+      matchDepTypes: ['pnpm-workspace.overrides'],
       matchUpdateTypes: ['major'],
       enabled: false
     }
