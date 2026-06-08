@@ -4,10 +4,16 @@ FROM mcr.microsoft.com/devcontainers/base:trixie@sha256:a07f1804d8e665ff64bf6adc
 
 # Note: The user vscode already exists by default in Microsofts base images
 ARG USERNAME=vscode
+
+# renovate: datasource=node-version depName=node versioning=node
 ARG NODE_VERSION=24
+# renovate: datasource=npm depName=corepack
 ARG COREPACK_VERSION=0.34.5
+# renovate: datasource=npm depName=playwright
 ARG PLAYWRIGHT_VERSION=1.60.0
+# renovate: datasource=github-releases depName=terrastruct/d2 versioning=semver extractVersion=^v(?<version>.*)$
 ARG D2_VERSION=0.7.1
+# renovate: datasource=github-releases depName=aquasecurity/trivy versioning=semver extractVersion=^v(?<version>.*)$
 ARG TRIVY_VERSION=0.70.0
 
 USER root

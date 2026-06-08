@@ -24,6 +24,17 @@
   npm: {
     minimumReleaseAge: '14 days',
   },
+  customManagers: [
+    {
+      customType: 'regex',
+      managerFilePatterns: [
+        '/(^|/)Dockerfile\\.dev$/',
+      ],
+      matchStrings: [
+        '# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: versioning=(?<versioning>\\S+))?(?: extractVersion=(?<extractVersion>\\S+))?\\s+ARG [A-Z0-9_]+=(?<currentValue>\\S+)',
+      ],
+    },
+  ],
   packageRules: [
     {
       groupName: 'vitest monorepo',
@@ -78,15 +89,18 @@
       ],
     },
     {
-      description: 'Group Node.js version updates in CI and package.json',
+      description: 'Group Node.js version updates in package.json, CI workflows, and Dockerfile.dev',
       matchDatasources: ['node-version'],
       matchFileNames: [
+        'package.json',
+        'Dockerfile.dev',
         '.github/workflows/ci.yml',
-        'package.json'
+        '.github/workflows/tests.yml',
+        '.github/workflows/e2e.yml',
       ],
       groupName: 'Node.js'
     },
-    { 
+    {
       description: 'Picomatch@2.3.2 is CVE fix for old not updated @types/jest-axe. This suppress major upgrades to avoid breaking changes.',
       matchPackageNames: ['picomatch'],
       matchDepTypes: ['pnpm-workspace.overrides'],
