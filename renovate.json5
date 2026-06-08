@@ -1,5 +1,5 @@
 /*! Every change validate this file with: */
-/*? npx --yes --package renovate -- renovate-config-validator renovate.json5 */
+/*? npx --yes --package renovate@latest -- renovate-config-validator renovate.json5 */
 
 {
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
